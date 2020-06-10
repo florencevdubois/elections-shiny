@@ -1,6 +1,4 @@
-# Note: percent map is designed to work with the counties data set
-# It may not work correctly with other data sets if their row order does 
-# not exactly match the order in which the maps package plots counties
+### percent map function ###
 percent_map <- function(var, color, legend.title, min = 0, max = 100) {
 
   # generate vector of fill colors for map
@@ -36,3 +34,16 @@ percent_map <- function(var, color, legend.title, min = 0, max = 100) {
     fill = shades[c(1, 25, 50, 75, 100)], 
     title = legend.title)
 }
+
+### Descriptive statistics tables ###
+
+
+
+
+
+
+
+
+
+
+
