@@ -13,6 +13,20 @@ library(stargazer)
 #### load data ####
 opinion <- read.csv("data/opinion.csv") 
 
+#### prep ####
+# all variables
+variables <- c("cohort" = 5, "survey id" = 4,  "year" = 2, "age" =  3, "pref defence" = 6, "pref childcare" =  7)
+# categorical variables
+categorical_variables <- c("cohort" = 5, "survey id" = 4)
+# dichotomous varibales
+dichotomous_variables <- c("pref defence" = 6, "pref childcare" =  7)
+# continuous variables
+continuous_variables <- c( "year" = 2, "age" =  3)
+# categorical and dichotomous variables (for cross tabs)
+cat_dicho_variables <- c(categorical_variables,  dichotomous_variables)
+# dependent variables only (dichotomous or continuous)
+dependent_variables <- c(continuous_variables, dichotomous_variables)
+
 #### source helper function ####
 #source("helpers.R")
 
@@ -96,9 +110,7 @@ ui <- navbarPage("Les élections (POL 3015)",
                               helpText("Explorez les variables", strong("continues"), "de la banque de données."),
                               selectInput("var_cont",
                                           label = "Sélectionnez une variable...",
-                                          choice = c("year" = 2,
-                                                     "age" = 3), 
-                                          selected = "year")),
+                                          choice = c(Choisissez='', continuous_variables))),
                             mainPanel(h3("Résumé de la variable continue"),
                                       p(em("Min"), "est la plus petite valeur.", 
                                         em("1st Qu."), "est le premier quartile.",
@@ -114,9 +126,7 @@ ui <- navbarPage("Les élections (POL 3015)",
                             sidebarPanel(helpText("Explorez les variables", strong("catégorielles"), "de la banque de données."),
                                          selectInput("var_cat",
                                                      label = "Sélectionnez une variable...",
-                                                     choice = c("cohort" = 4,
-                                                                "s_id" = 5), 
-                                                     selected = "cohort")),
+                                                     choice = c(Choisissez='', categorical_variables))),
                             mainPanel(h3("Résumé de la variable catégorielle"),
                                       p("Ce tableau indique combien de répondants ont sélectionné chaque catégorie de la variable.", 
                                         em("<NA>"), "dénote le nombre d'observations manquantes (personnes n'ayant pas répondu à la question)."),
@@ -127,9 +137,7 @@ ui <- navbarPage("Les élections (POL 3015)",
                             sidebarPanel(helpText("Explorez les variables", strong("dichotomiques"), "de la banque de données."),
                                          selectInput("var_dicho",
                                                      label = "Sélectionnez une variable...",
-                                                     choice = c("pref_defence" = 6,
-                                                                "pref_childcare" = 7),
-                                                     selected = "pref_defence")),
+                                                     choice = c(Choisissez='', dichotomous_variables))),
                             mainPanel(h3("Résumé de la variable dichotomique"), 
                                       p(em("Min"), "est la plus petite valeur.", 
                                         em("1st Qu."), "est le premier quartile.",
@@ -149,14 +157,10 @@ ui <- navbarPage("Les élections (POL 3015)",
                               helpText("Sélectionez deux variables pour créer un tableau croisé."),
                               selectInput("var1",
                                           label = "Sélectionnez une variable pour les lignes...",
-                                          choice = c("cohort" = 4,
-                                                     "s_id" = 5), 
-                                          selected = "cohort"),
+                                          choice = cat_dicho_variables),
                             selectInput("var2",
                                         label = "Sélectionnez une variable pour les colonnes...",
-                                        choice = c("pref_defence" = 6,
-                                                   "pref_childcare" = 7),
-                                        selected = "pref_defence")),
+                                        choice = cat_dicho_variables)),
                             mainPanel(h3("Votre tableau croisé"),
                                       tableOutput("crosstab"))
                           )
@@ -165,32 +169,23 @@ ui <- navbarPage("Les élections (POL 3015)",
                  tabPanel("Analyses multivariées",
                           sidebarLayout(
                             sidebarPanel(
-                              helpText("Sélectionez une variable dépendante, une variable indépendante et des variables de contrôle pour l'analyse de régression."),
+                              helpText("Sélectionez une variable dépendante, une variable indépendante et (si nécessaire) des variables de contrôle pour l'analyse de régression."),
                               selectInput("dv",
                                           label = "Sélectionnez une variable dépendante...",
-                                          choice = c("pref_defence" = 6,
-                                                     "pref_childcare" = 7),
-                                          selected = "pref_defence"),
+                                          choice = c(Choisissez='', dependent_variables)),
                               selectInput("iv",
                                           label = "Sélectionnez une variable indépendante...",
-                                          choice = c("year" = 2,
-                                                     "age" = 3), 
-                                          selected = "year"),
-                              checkboxGroupInput("controls",
-                                                 label = "Sélectionnez une ou des variables de contrôle...",
-                                                 choices = list("year" = 2,
-                                                                "age" = 3),
-                                                 selected = "year")),
+                                          choice = c(Choisissez='', variables)),
+                              selectInput("controls",
+                                          label = "Sélectionnez une ou des variables de contrôle...",
+                                          multiple = T,
+                                          choices = c(Choisissez='', variables))),
                             mainPanel(h3("Résultats de votre analyse de régression"),
                                       tableOutput("regression"),
-                                      verbatimTextOutput("regression2"))
+                                      verbatimTextOutput("test"))
                           ))
   
 )
-
-# "checkGroup", label = h3("Checkbox group"), 
-# choices = list("Choice 1" = 1, "Choice 2" = 2, "Choice 3" = 3),
-# selected = 1),
 
 #### Define server logic ####
 server <- function(input, output) {
@@ -198,52 +193,58 @@ server <- function(input, output) {
   #### outputs, descriptives statistics (tables) ####
   output$sum_cont <- renderPrint({
     
+    validate(need(input$var_cont, 'Les statistiques descriptives apparaîtront lorsque vous aurez sélectionné une variable.'))
     summary(opinion[, as.numeric(input$var_cont)])
   })
   
   output$sum_cat <- renderPrint({
 
+    validate(need(input$var_cat, 'Les statistiques descriptives apparaîtront lorsque vous aurez sélectionné une variable.'))
     table(opinion[, as.numeric(input$var_cat)], useNA = "always")
   })
   
   output$sum_dicho <- renderPrint({
     
+    validate(need(input$var_dicho, 'Les statistiques descriptives apparaîtront lorsque vous aurez sélectionné une variable.'))
     summary(opinion[, as.numeric(input$var_dicho)])
   })
   
   #### outputs, descriptive statistics (histograms) ####
   output$hist_cont <- renderPlot({
     
+    validate(need(input$var_cont, 'Un histogramme apparaîtra lorsque vous aurez sélectionné une variable.'))
+    
     x <- opinion[, as.numeric(input$var_cont)]
     
     ggplot(opinion, aes(x = x)) + 
-      geom_histogram(fill = "navyblue") + 
-      labs(title = names(opinion[as.numeric(input$var_cont)]),
-           x = names(opinion[as.numeric(input$var_cont)]),
+      geom_histogram(fill = "navyblue",  binwidth = .3) + 
+      labs(x = names(opinion[as.numeric(input$var_cont)]),
            y = "Nombre d'observations") +
       theme_minimal()
   })
   
   output$hist_cat <- renderPlot({
     
+    validate(need(input$var_cat, 'Un histogramme apparaîtra lorsque vous aurez sélectionné une variable.'))
+    
     x <- opinion[, as.numeric(input$var_cat)]
     
     ggplot(opinion, aes(x = x)) + 
       geom_histogram(stat = "count",fill = "navyblue") + 
-      labs(title = names(opinion[as.numeric(input$var_cat)]),
-           x = names(opinion[as.numeric(input$var_cat)]),
+      labs(x = names(opinion[as.numeric(input$var_cat)]),
            y = "Nombre d'observations") +
       theme_minimal()
   })
   
   output$hist_dicho <- renderPlot({
     
-    x <- opinion[, as.numeric(input$var_dicho)]
+    validate(need(input$var_dicho, 'Un histogramme apparaîtra lorsque vous aurez sélectionné une variable.'))
+    
+    x <- opinion[, as.numeric(input$var_dicho)] 
     
     ggplot(opinion, aes(x = x)) + 
-      geom_histogram(fill = "navyblue") + 
-      labs(title = names(opinion[as.numeric(input$var_dicho)]),
-           x = names(opinion[as.numeric(input$var_dicho)]),
+      geom_histogram(fill = "navyblue", stat = "count") + 
+      labs(x = names(opinion[as.numeric(input$var_dicho)]),
            y = "Nombre d'observations") +
       scale_x_continuous(breaks = c(0,1)) +
       theme_minimal()
@@ -253,36 +254,72 @@ server <- function(input, output) {
   output$crosstab <- renderTable(as.data.frame.matrix(table(opinion[, as.numeric(input$var1)], opinion[, as.numeric(input$var2)], useNA = "always")), rownames = T)
   
   #### outputs, regressions ####
+  # set-up for reactive output --- we specify that the regression should include only y and x if there are no controls,
+  # if there is one control, the regression shoud include y, x and the control
+  modelfits <- reactive({
+    if(length(input$controls) == 0){
+      y <- opinion[, as.numeric(input$dv)]
+      x <- opinion[, as.numeric(input$iv)]
+      
+      model <- lm(y ~ x, data = opinion) %>% 
+        broom::tidy() %>% 
+        mutate(term = ifelse(term == "(Intercept)", "constante", 
+                             ifelse(term == "x", names(opinion[as.numeric(input$iv)]), 
+                                    ifelse(str_detect(term, "x"), str_remove(term, "x"), term)))) %>% 
+        rename(` ` = term,
+               Coefficient = estimate,
+               `Erreur-type` = std.error,
+               `Statistique t` = statistic,
+               `Valeur p` = p.value)
+    }
+    if(length(input$controls) >= 1){
+      y <- opinion[, as.numeric(input$dv)]
+      x <- opinion[, as.numeric(input$iv)]
+      control <- opinion[, as.numeric(input$controls)]
+      datatemp <- data.frame(y,x,control)
+      
+      model <- lm(y ~ ., data = datatemp) %>% 
+        broom::tidy() %>% 
+        mutate(term = ifelse(term == "(Intercept)", "constante", 
+                             ifelse(term == "x", names(opinion[as.numeric(input$iv)]), 
+                                    ifelse(str_detect(term, "x"), str_remove(term, "x"), 
+                                           ifelse(term == "control", names(opinion[as.numeric(input$controls)]), 
+                                                  ifelse(str_detect(term, "control"), str_remove(term, "control"), term)))))) %>% 
+        rename(` ` = term,
+               Coefficient = estimate,
+               `Erreur-type` = std.error,
+               `Statistique t` = statistic,
+               `Valeur p` = p.value)
+    }
+    model
+  })
+  
   output$regression <- renderTable({
+    
+   validate(
+     need(input$dv, 'Les résultats apparaîtront lorsque vous aurez sélectionné une variable dépendante.'),
+     need(input$iv, 'Les résultats apparaîtront lorsque vous aurez sélectionné une variables indépendante.')
+     )
    
-   y <- opinion[, as.numeric(input$dv)]
-   x <- opinion[, as.numeric(input$iv)]
+   modelfits()
    
-   model <- lm(y ~ x, data = opinion) %>% 
-     broom::tidy() %>% 
-     mutate(term = ifelse(term == "(Intercept)", "Constante", 
-                          ifelse(term == "x", names(opinion[as.numeric(input$iv)]), term))) %>% 
-     rename(Variable = term,
-            Coefficient = estimate,
-            `Erreur-type` = std.error,
-            `Statistique t` = statistic,
-            `Valeur p` = p.value)
-   
-   model
-   
- })
+  })
   
   # ici --- trouver comment ajouter les contrôles ! et s'ils ne sélectionnent pas tous le même nombre de comtrôle
   output$regression2 <- renderPrint({
     
     y <- opinion[, as.numeric(input$dv)] 
     x <- opinion[, as.numeric(input$iv)]
-    controls <- opinion[, as.numeric(input$controls)]
-    summary(lm(y ~ x + controls, data = opinion))
+    #controls <- opinion[, as.numeric(input$controls)]
+    
+    fit <- lm(y ~ x, data = opinion) # + controls
+    #names(fit$coefficients) <- c("Intercept", opinion$iv)
+    summary(fit)
     #summary(lm(y ~ names(opinion[as.numeric(input$iv)]), data = opinion))
   })
   
 }
+
 
 ##### Run the app ####
 shinyApp(ui = ui, server = server)
