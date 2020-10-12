@@ -45,9 +45,11 @@ ui <- navbarPage("Les élections (POL 3015)",
                             p(br()),
                             p("Ruth Dassonneville, Professeure agrégée, Département de science politique de l'Université de Montréal; enseignante du cours POL 3015", style = "font-size:14px"), 
                             p("Gestion de la banque de données par Alexandra Jabbour, doctorante en science politique à l'Université de Montréal", style = "font-size:14px"),
-                            p("Programmation de l'application web par Florence Vallée-Dubois, doctorante en science politique à l'Université de Montréal", style = "font-size:14px"))
+                            p("Programmation de l'application web par Florence Vallée-Dubois, doctorante en science politique à l'Université de Montréal", style = "font-size:14px"),
+                            HTML("Site inspiré de l'application créée par Dave Armstrong pour <a href='https://quantoid.shinyapps.io/CES_2020/'>analyser les données de l'étude électorale canadienne</a>"))
                             ),
                  #### codebook panel ####
+                 #<a href='mailto:dave.armstrong@uwo.ca'>Dave Armstrong</a>
                  tabPanel("Description des variables",
                           fluidPage(
                             p("Cette liste comprend toutes les variables du sondage mené par les étudiant.e.s du cours POL 3015 (automne 2020). 
@@ -179,13 +181,34 @@ ui <- navbarPage("Les élections (POL 3015)",
                               selectInput("controls",
                                           label = "Sélectionnez une ou des variables de contrôle...",
                                           multiple = T,
-                                          choices = c(Choisissez='', variables))),
+                                          choices = c(Choisissez='', variables)),
+                              radioButtons("vary", 
+                                           label = "Pour faire l'analyse sur certains sous-groupes de l'échantillon seulement, sélectionnez d'abord le facteur qui vous intéresse...", 
+                                           choices = c("Tous les répondants"="none", "Année" = "years", "Nationalité" = "country"), 
+                                           selected = "none"),
+                              checkboxGroupInput("years",
+                                                 label = "Si vous avez décidé de faire l'analyse sur certaines années seulement, sélectionnez-les ici...",
+                                                 choices = c("1999","2000","2001","2002","2003"),
+                                                 selected = c("1999","2000","2001","2002","2003")),
+                              checkboxGroupInput("country",
+                                                 label = "Si vous avez décidé de faire l'analyse sur les répondants d'une même nationalité, sélectionnez-la ici...",
+                                                 choices = c("Canadienne","Autre"),
+                                                 selected = c("Canadienne","Autre"))),
                             mainPanel(h3("Résultats de votre analyse de régression"),
+                                      p("Explication des colonnes ici."),
                                       tableOutput("regression"),
-                                      verbatimTextOutput("test"))
+                                      h4("Informations additionnelles sur votre modèle"),
+                                      verbatimTextOutput("regression_stats"))
                           ))
   
 )
+
+# checkboxGroupInput(inputId="provs", "Regions", 
+#                    choices=c("Atlantic", "Quebec", "Ontario", "West"), 
+#                    selected=c("Atlantic", "Quebec", "Ontario", "West")),
+# checkboxGroupInput(inputId="years", "Years", 
+#                    choices=c(2004, 2006, 2008, 2011, 2015, 2019), 
+#                    selected=c(2004, 2006, 2008, 2011, 2015, 2019))), 
 
 #### Define server logic ####
 server <- function(input, output) {
@@ -297,25 +320,31 @@ server <- function(input, output) {
   output$regression <- renderTable({
     
    validate(
-     need(input$dv, 'Les résultats apparaîtront lorsque vous aurez sélectionné une variable dépendante.'),
-     need(input$iv, 'Les résultats apparaîtront lorsque vous aurez sélectionné une variables indépendante.')
+     need(input$dv, 'Les résultats apparaîtront lorsque vous aurez sélectionné une variable dépendante et une variable indépendante.'),
+     need(input$iv, ' ')
      )
    
    modelfits()
    
   })
   
-  # ici --- trouver comment ajouter les contrôles ! et s'ils ne sélectionnent pas tous le même nombre de comtrôle
-  output$regression2 <- renderPrint({
+  ##### outputs, regressions (raw) ####
+  output$regression_stats <- renderPrint({
+    
+    validate(
+      need(input$dv, 'Les résultats apparaîtront lorsque vous aurez sélectionné une variable dépendante et une variable indépendante.'),
+      need(input$iv, ' ')
+    )
     
     y <- opinion[, as.numeric(input$dv)] 
     x <- opinion[, as.numeric(input$iv)]
-    #controls <- opinion[, as.numeric(input$controls)]
+    control <- opinion[, as.numeric(input$controls)]
+    datatemp <- data.frame(y,x,control)
     
-    fit <- lm(y ~ x, data = opinion) # + controls
-    #names(fit$coefficients) <- c("Intercept", opinion$iv)
-    summary(fit)
-    #summary(lm(y ~ names(opinion[as.numeric(input$iv)]), data = opinion))
+    fit <- lm(y ~ ., data = datatemp)
+    print("Nombre d'observations:")
+    nobs(fit) 
+    # si j'ajoute d'autres infos == faire une liste avec tout et imprimer la liste
   })
   
 }
