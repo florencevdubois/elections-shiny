@@ -9,23 +9,207 @@ library(shiny)
 library(datasets)
 library(tidyverse)
 library(stargazer)
+library(knitr)
 
 #### load data ####
-opinion <- read.csv("data/opinion.csv") 
+#opinion <- read.csv("data/opinion.csv") 
+d <- read.csv("data/sondage_recoded.csv") %>% dplyr::select(-X)
 
-#### prep ####
-# all variables
-variables <- c("cohort" = 5, "survey id" = 4,  "year" = 2, "age" =  3, "pref defence" = 6, "pref childcare" =  7)
-# categorical variables
-categorical_variables <- c("cohort" = 5, "survey id" = 4)
-# dichotomous varibales
-dichotomous_variables <- c("pref defence" = 6, "pref childcare" =  7)
-# continuous variables
-continuous_variables <- c( "year" = 2, "age" =  3)
+# categorical variables - 101 variables
+categorical_variables <- c("Emploi" = 3, 
+                           "Revenu" = 4,
+                           "Genre" = 5,
+                           "Citoyenneté" = 6,
+                           "Ethnie" = 7,
+                           "Éducation" = 9,
+                           "Religion" = 10,
+                           "Réseau social" = 11,
+                           "Résidence" = 12,
+                           "Province" = 16, 
+                           "Classe sociale" = 18,
+                           "Résidence parents - province" = 21,
+                           "Residence parents - pays" = 22,
+                           "Climat social" = 23,
+                           "Covid - satisfaction" = 24,
+                           "Covid - gestion" = 26,
+                           "Covid - jeunes" = 28,
+                           "Covid - politiques" = 29,
+                           "Immigration - ouverture" = 30, 
+                           "Immigration - Syrie" = 31,
+                           "Climat - économie" = 32,
+                           "Transition énergétique - taxes" = 33,
+                           "Climat - impacts" = 34,
+                           "Confiance - police" = 35,
+                           "Sécurité - quartier" = 36,
+                           "Sécurité - gouvernement" = 37,
+                           "Sécurité - immigration" = 38,
+                           "Sécurité - frontières" = 39, 
+                           "Immigration - quotas" = 40,
+                           "Mninorités - partis" = 41,
+                           "Corruption" = 42,
+                           "Mondialisation" = 45,
+                           "Économie - évaluation sociotropique" = 46,
+                           "Économie - évaluation égotropique" = 47,
+                           "Économie - statisfaction" = 48,
+                           "Économie - préoccupation" = 49,
+                           "Économie - critères" = 50, 
+                           "Économie - confiance (Canada)" = 51,
+                           "Économie - confiance (France)" = 52,
+                           "Immigration - confiance (Canada)" = 53,
+                           "Immigration - confiance (France)" = 54,
+                           "Représentation des minorités" = 56,
+                           "Importance - écologie" = 64,
+                           "Inquiétude - attentats" = 65,
+                           "Satisfaction envers la démocratie" = 67,
+                           "Satisfaction Gouvernement" = 68, 
+                           "Institutions démocratiques" = 69,
+                           "Vote - démonstration" = 70,
+                           "Confiance - Chef de l'État" = 71,
+                           "Altruisme - politiques" = 72,
+                           "Education civique" = 73,
+                           "Écoles" = 74,
+                           "Compréhension - élites" = 75,
+                           "Importance vote" = 76,
+                           "Importance - représentation" = 77, 
+                           "Disproportion électorale" = 78,
+                           "Partis - vote" = 79,
+                           "Votes - objectif" = 80,
+                           "Vote - délais" = 81,
+                           "Réédition de comptes" = 82,
+                           "Intérêt - politique US" = 85,
+                           "Engagement politique" = 87,
+                           "Proche parti" = 88,
+                           "Représentation = partis" = 94, 
+                           "Mode de scrutin" = 95,
+                           "Changement scrutin" = 96,
+                           "Sources d'information" = 104,
+                           "Réseaux sociaux - cause" = 105,
+                           "Médias traditionnels" = 106,
+                           "Consultation sondage - 1" = 107,
+                           "Consultation sondage 2 - Canada" = 108,
+                           "Consultation sondage 2 - France" = 109,
+                           "Principale source" = 110, 
+                           "Engagement - réseaux sociaux" = 111,
+                           "Abonnements - personnalités" = 112,
+                           "Fréquence utilisation" = 113,
+                           "Contact - information" = 115,
+                           "Plateforme" = 116,
+                           "Couverture - influence" = 117,
+                           "Médias - neutralité" = 118,
+                           "Influence des médias sur l'élection" = 119,
+                           "Biais médias" = 120, 
+                           "Chaînes - indépendance" = 121,
+                           "Niveau d'information" = 122,
+                           "Confiance contenu RS" = 125,
+                           "Confiance - TV et radio" = 126,
+                           "Confiance - presse écrite" = 127,
+                           "Site - parti" = 128,
+                           "Like - parti" = 129,
+                           "Vote habitude" = 146,
+                           "Vote - anciens présidents" = 166, 
+                           "Aucune préférence" = 168,
+                           "Préférence - parti" = 169,
+                           "Satisfaction mode de scrutin" = 170,
+                           "Vote - chance favoris" = 171,
+                           "Motivation" = 173,
+                           "Vote - premier choix" = 174,
+                           "Stratégie - vote 2" = 175,
+                           "Autre choix - fréquence" = 176, 
+                           "Refus de voter pour un parti - Canada" = 177,
+                           "Refus de voter pour un parti - France" = 178)
+
+# dichotomous varibales - 44 variables
+dichotomous_variables <- c("Minorité" = 8, 
+                           "Naissance pays résidence" = 13,
+                           "Cohabitation" = 14,
+                           "Droit de vote" = 15,
+                           "Né.e dans votre province de résidence" = 17,
+                           "Classe sociale - parents" = 19,
+                           "Langue" = 20,
+                           "Covid - accès aux soins" = 25,
+                           "Déficit" = 55,
+                           "Sophistication - États-Unis" = 130, 
+                           "Sophistication - Freeland" = 131,
+                           "Sophistication - Legault" = 132,
+                           "Sophistication - Macron" = 133,
+                           "Sophistication - Pence" = 134,
+                           "Sophistication - Singh" = 135,
+                           "Participation" = 136,
+                           "Québec 2018 - CAQ" = 137,
+                           "Québec 2018 - PQ" = 138,
+                           "Québec 2018 - PLQ" = 139, 
+                           "Québec 2018 - QS" = 140,
+                           "Québec 2018 - PVQ" = 141,
+                           "Québec 2018 - Autre" = 142,
+                           "Québec 2018 - Bulletin nul" = 143,
+                           "Québec 2018 - Pas voté" = 144,
+                           "Vote - US" = 145,
+                           "Vote - même parti" = 147,
+                           "Intention de vote France - République en marche" = 148,
+                           "Intention de vote France - Républicains" = 149, 
+                           "Intention de vote France - Verts" = 150,
+                           "Intention de vote France - PS" = 151,
+                           "Intention de vote France - RN" = 152,
+                           "Intention de vote France - France insoumise" = 153,
+                           "Intention de vote Canada - Libéral" = 154,
+                           "Intention de vote Canada - Conservateur" = 155,
+                           "Intention de vote Canada - NPD" = 156,
+                           "Intention de vote Canada - Bloc" = 157,
+                           "Intention de vote Canada - Vert" = 158,
+                           "Intention de vote Canada - Autre" = 159,
+                           "Intention de vote Québec - CAQ" = 160,
+                           "Intention de vote Québec - PQ" = 161,
+                           "Intention de vote Québec - PLQ" = 162,
+                           "Intention de vote Québec - QS" = 163,
+                           "Intention de vote Québec - PVQ" = 164,
+                           "Intention de vote Québec - Autre" = 165)
+
+# continuous variables - 32 variables
+continuous_variables <- c("Année de naissance" = 1, 
+                          "Âge" = 2,
+                          "Covid - inquiétude" = 27, 
+                          "Corruption - participation" = 43,
+                          "Corruption - évaluation des partis" = 44, 
+                          "Enjeux - chômage" = 57,
+                          "Enjeux - environnement" = 58, 
+                          "Enjeux - immigration" = 59,
+                          "Enjeux - économie" = 60, 
+                          "Enjeux - éducation" = 61,
+                          "Enjeux - santé" = 62,
+                          "Importance - immigration" = 63,
+                          "Idéologie" = 66,
+                          "Importance - chef" = 83, 
+                          "Intérêt politique" = 84,
+                          "Connaissances - politique US" = 86, 
+                          "Importance traits" = 89,
+                          "Traits - importance - intégrité" = 90, 
+                          "Traits - importance - leadership" = 91,
+                          "Traits - importance - compétence" = 92, 
+                          "Traits - importance - empathie" = 93,
+                          "Vote parti nationaliste" = 97, 
+                          "Intégration localité" = 98,
+                          "Thermomètre partis - Libéral" = 99, 
+                          "Thermomètre partis - Conservateur" = 100,
+                          "Thermomètre partis - NPD" = 101, 
+                          "Thermomètre partis - Bloc" = 102,
+                          "Thermomètre partis - Parti vert" = 103, 
+                          "Inscription réseaux sociaux" = 114,
+                          "Effet - débats" = 123, 
+                          "Importance débats TV" = 124,
+                          "Vote stratégique" = 167,
+                          "Importance compétence" = 172)
+
 # categorical and dichotomous variables (for cross tabs)
 cat_dicho_variables <- c(categorical_variables,  dichotomous_variables)
+
 # dependent variables only (dichotomous or continuous)
 dependent_variables <- c(continuous_variables, dichotomous_variables)
+
+# all variables
+variables <- c(categorical_variables, dichotomous_variables, continuous_variables)
+
+# chanhe class of categorical and dichotomous variables
+d[cat_dicho_variables] <- sapply(d[cat_dicho_variables], as.factor)
 
 #### source helper function ####
 #source("helpers.R")
@@ -52,58 +236,17 @@ ui <- navbarPage("Les élections (POL 3015)",
                  #<a href='mailto:dave.armstrong@uwo.ca'>Dave Armstrong</a>
                  tabPanel("Description des variables",
                           fluidPage(
-                            p("Cette liste comprend toutes les variables du sondage mené par les étudiant.e.s du cours POL 3015 (automne 2020). 
-                              Choisissez parmi ces variables pour mener les analyses qui vous permettront de répondre à votre question de recherche. 
+                            p("Le codebook ci-dessous comprend toutes les variables du sondage que vous avez mené cet automne.", style = "font-size:16px"),
+                            p("Veuillez vous référer à ce codebook pour savoir comment chaque variable a été codée. Par exemple, certaines variables comprennent les choix de réponses", 
+                              em('Très satisfait, Satisfait, Peu satisfait, Très insatisfait,'), "codés 1, 2, 3, et 4. Gardez toujours cela en tête lors de votre exploration des variables
+                              dans les onglets", em("Statistiques descriptives, Tableaux croisés"), "et", em("Analyses multivariées."), style = "font-size:16px"),
+                            p("Vous devez choisir parmi ces variables pour mener les analyses qui vous permettront de répondre à votre question de recherche. 
                               Il y a des variables socio-démographiques (comme l'âge des répondant.e.s, leur niveau d'éducation, etc.), 
-                              des variables qui permettent de mesurer les comportements politiques des répondant.e.s (Votent-ils? Pour qui votent-ils? etc.),
-                              des variables qui mesurent leurs attitudes envers les autres (XXX, XXX, etc.) et plusieurs autres variables pertinentes.
-                              L'échantillon est de XXX répondant.e.s, mais certaines personnes n'ont pas répondu à toutes les questions du sondage.
-                              Le sondage a été mené entre le X et le X octobre 2020 via un recrutement non-probabiliste.", style = "font-size:16px"),
-                            h3("Liste des variables"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"),
-                            p(strong("Variable:", style = "font-size:16px"), "Description", style = "font-size:16px"))
+                              des variables qui permettent de mesurer les comportements politiques des répondant.e.s (Ont-ils voté aux dernières élections? Sont-ils intéressés par la politique? etc.),
+                              des variables qui mesurent leurs attitudes (confiance envers la police, préférence quant au type de mode de scrutin, etc.) et plusieurs autres variables pertinentes.", style = "font-size:16px"),
+                            p("L'échantillon est de 789 répondant.e.s, mais certaines personnes n'ont pas répondu à toutes les questions du sondage.
+                              Le sondage a été mené entre le 21 et le 31 octobre 2020 via un recrutement non-probabiliste.", style = "font-size:16px")),
+                          fluidPage(includeHTML("codebook.html"))
                  ),
                  #### descriptive statistics panel ####
                  tabPanel("Statistiques descriptives",
@@ -141,13 +284,8 @@ ui <- navbarPage("Les élections (POL 3015)",
                                                      label = "Sélectionnez une variable...",
                                                      choice = c(Choisissez='', dichotomous_variables))),
                             mainPanel(h3("Résumé de la variable dichotomique"), 
-                                      p(em("Min"), "est la plus petite valeur.", 
-                                        em("1st Qu."), "est le premier quartile.",
-                                        em("Median"), "est la médiane.", 
-                                        em("Mean"), "est la moyenne.",
-                                        em("3rd Qu."), "est le troisième quartile.", 
-                                        em("Max."), "est la valeur maximale.",
-                                        em("NA's"), "dénote le nombre d'observations manquantes (personnes n'ayant pas répondu à la question)."),
+                                      p("Ce tableau indique combien de répondants ont sélectionné chaque catégorie de la variable.", 
+                                        em("<NA>"), "dénote le nombre d'observations manquantes (personnes n'ayant pas répondu à la question)."),
                                       verbatimTextOutput("sum_dicho"),
                                       plotOutput("hist_dicho"))
                           )
@@ -181,19 +319,15 @@ ui <- navbarPage("Les élections (POL 3015)",
                               selectInput("controls",
                                           label = "Sélectionnez une ou des variables de contrôle...",
                                           multiple = T,
-                                          choices = c(Choisissez='', variables)),
-                              radioButtons("vary", 
-                                           label = "Pour faire l'analyse sur certains sous-groupes de l'échantillon seulement, sélectionnez d'abord le facteur qui vous intéresse...", 
-                                           choices = c("Tous les répondants" = "none", "Année" = "years", "Nationalité" = "country"), 
-                                           selected = "none"),
-                              checkboxGroupInput("years",
-                                                 label = "Si vous avez décidé de faire l'analyse sur certaines années seulement, sélectionnez-les ici...",
-                                                 choices = c("1999","2000","2001","2002","2003"),
-                                                 selected = c("1999","2000","2001","2002","2003")),
-                              checkboxGroupInput("country",
-                                                 label = "Si vous avez décidé de faire l'analyse sur les répondants d'une même nationalité, sélectionnez-la ici...",
-                                                 choices = c("Canadienne","Autre"),
-                                                 selected = c("Canadienne","Autre"))),
+                                          choices = c(Choisissez='', variables))),
+                              # radioButtons("vary", 
+                              #              label = "Pour faire l'analyse sur certains sous-groupes de l'échantillon seulement, sélectionnez d'abord le facteur qui vous intéresse...", 
+                              #              choices = c("Tous les répondants" = "none", "Français" = "french", "Canadiens" = "canadians"), 
+                              #              selected = "none"),
+                              # checkboxGroupInput("country",
+                              #                    label = "Si vous avez décidé de faire l'analyse sur les répondants d'une même nationalité, sélectionnez-la ici...",
+                              #                    choices = c("Canadienne","Autre"),
+                              #                    selected = c("Canadienne","Autre"))),
                             mainPanel(h3("Résultats de votre analyse de régression"),
                                       p("Explication des colonnes ici."),
                                       tableOutput("regression"),
@@ -217,19 +351,19 @@ server <- function(input, output) {
   output$sum_cont <- renderPrint({
     
     validate(need(input$var_cont, 'Les statistiques descriptives apparaîtront lorsque vous aurez sélectionné une variable.'))
-    summary(opinion[, as.numeric(input$var_cont)])
+    summary(d[, as.numeric(input$var_cont)])
   })
   
   output$sum_cat <- renderPrint({
 
     validate(need(input$var_cat, 'Les statistiques descriptives apparaîtront lorsque vous aurez sélectionné une variable.'))
-    table(opinion[, as.numeric(input$var_cat)], useNA = "always")
+    table(d[, as.numeric(input$var_cat)], useNA = "always")
   })
   
   output$sum_dicho <- renderPrint({
     
     validate(need(input$var_dicho, 'Les statistiques descriptives apparaîtront lorsque vous aurez sélectionné une variable.'))
-    summary(opinion[, as.numeric(input$var_dicho)])
+    table(d[, as.numeric(input$var_dicho)], useNA = "always")
   })
   
   #### outputs, descriptive statistics (histograms) ####
@@ -237,11 +371,11 @@ server <- function(input, output) {
     
     validate(need(input$var_cont, 'Un histogramme apparaîtra lorsque vous aurez sélectionné une variable.'))
     
-    x <- opinion[, as.numeric(input$var_cont)]
+    x <- d[, as.numeric(input$var_cont)]
     
-    ggplot(opinion, aes(x = x)) + 
+    ggplot(d, aes(x = x)) + 
       geom_histogram(fill = "navyblue",  binwidth = .3) + 
-      labs(x = names(opinion[as.numeric(input$var_cont)]),
+      labs(x = names(d[as.numeric(input$var_cont)]),
            y = "Nombre d'observations") +
       theme_minimal()
   })
@@ -250,11 +384,11 @@ server <- function(input, output) {
     
     validate(need(input$var_cat, 'Un histogramme apparaîtra lorsque vous aurez sélectionné une variable.'))
     
-    x <- opinion[, as.numeric(input$var_cat)]
+    x <- d[, as.numeric(input$var_cat)]
     
-    ggplot(opinion, aes(x = x)) + 
+    ggplot(d, aes(x = x)) + 
       geom_histogram(stat = "count",fill = "navyblue") + 
-      labs(x = names(opinion[as.numeric(input$var_cat)]),
+      labs(x = names(d[as.numeric(input$var_cat)]),
            y = "Nombre d'observations") +
       theme_minimal()
   })
@@ -263,32 +397,32 @@ server <- function(input, output) {
     
     validate(need(input$var_dicho, 'Un histogramme apparaîtra lorsque vous aurez sélectionné une variable.'))
     
-    x <- opinion[, as.numeric(input$var_dicho)] 
+    x <- d[, as.numeric(input$var_dicho)] 
     
-    ggplot(opinion, aes(x = x)) + 
+    ggplot(d, aes(x = x)) + 
       geom_histogram(fill = "navyblue", stat = "count") + 
-      labs(x = names(opinion[as.numeric(input$var_dicho)]),
+      labs(x = names(d[as.numeric(input$var_dicho)]),
            y = "Nombre d'observations") +
-      scale_x_continuous(breaks = c(0,1)) +
+      #scale_x_continuous(breaks = c(0,1)) +
       theme_minimal()
   })
   
   #### outputs, crosstabs ####
-  output$crosstab <- renderTable(as.data.frame.matrix(table(opinion[, as.numeric(input$var1)], opinion[, as.numeric(input$var2)], useNA = "always")), rownames = T)
+  output$crosstab <- renderTable(as.data.frame.matrix(table(d[, as.numeric(input$var1)], d[, as.numeric(input$var2)], useNA = "always")), rownames = T)
   
   #### outputs, regressions ####
   # set-up for reactive output --- we specify that the regression should include only y and x if there are no controls,
   # if there is one control, the regression shoud include y, x and the control
   modelfits <- reactive({
     if(length(input$controls) == 0){
-      y <- opinion[, as.numeric(input$dv)]
-      x <- opinion[, as.numeric(input$iv)]
+      y <- d[, as.numeric(input$dv)]
+      x <- d[, as.numeric(input$iv)]
+      datatemp1 <- data.frame(y,x)
       
-      model <- lm(y ~ x, data = opinion) %>% 
+      model <- lm(y ~ x, data = datatemp1) %>% 
         broom::tidy() %>% 
         mutate(term = ifelse(term == "(Intercept)", "constante", 
-                             ifelse(term == "x", names(opinion[as.numeric(input$iv)]), 
-                                    ifelse(str_detect(term, "x"), str_remove(term, "x"), term)))) %>% 
+                             ifelse(term == "x", names(d[as.numeric(input$iv)]), term))) %>% # ifelse(str_detect(term, "x"), str_remove(term, "x"), # changed as.numeric(input$iv) to input$iv
         rename(` ` = term,
                Coefficient = estimate,
                `Erreur-type` = std.error,
@@ -296,18 +430,17 @@ server <- function(input, output) {
                `Valeur p` = p.value)
     }
     if(length(input$controls) >= 1){
-      y <- opinion[, as.numeric(input$dv)]
-      x <- opinion[, as.numeric(input$iv)]
-      control <- opinion[, as.numeric(input$controls)]
-      datatemp <- data.frame(y,x,control)
+      y <- d[, as.numeric(input$dv)]
+      x <- d[, as.numeric(input$iv)]
+      control <- d[, as.numeric(input$controls)]
+      datatemp2 <- data.frame(y,x,control)
       
-      model <- lm(y ~ ., data = datatemp) %>% 
+      model <- lm(y ~ ., data = datatemp2) %>% 
         broom::tidy() %>% 
         mutate(term = ifelse(term == "(Intercept)", "constante", 
-                             ifelse(term == "x", names(opinion[as.numeric(input$iv)]), 
-                                    ifelse(str_detect(term, "x"), str_remove(term, "x"), 
-                                           ifelse(term == "control", names(opinion[as.numeric(input$controls)]), 
-                                                  ifelse(str_detect(term, "control"), str_remove(term, "control"), term)))))) %>% 
+                             ifelse(term == "x", names(d[as.numeric(input$iv)]),  # changed as.numeric(input$iv) to input$iv
+                                    #ifelse(str_detect(term, "x"), str_remove(term, "x"), 
+                                           ifelse(term == "control", names(d[as.numeric(input$controls)]), term)))) %>% # ifelse(str_detect(term, "control"), str_remove(term, "control") # changed as.numeric(input$controls) to input$controls
         rename(` ` = term,
                Coefficient = estimate,
                `Erreur-type` = std.error,
@@ -336,9 +469,9 @@ server <- function(input, output) {
       need(input$iv, ' ')
     )
     
-    y <- opinion[, as.numeric(input$dv)] 
-    x <- opinion[, as.numeric(input$iv)]
-    control <- opinion[, as.numeric(input$controls)]
+    y <- d[, as.numeric(input$dv)] 
+    x <- d[, as.numeric(input$iv)]
+    control <- d[, as.numeric(input$controls)]
     datatemp <- data.frame(y,x,control)
     
     fit <- lm(y ~ ., data = datatemp)
