@@ -39,7 +39,40 @@ dat <- dat %>%
          vote_quebec_PLQ = ifelse(vote_quebec == 3, 1, 0),
          vote_quebec_QS = ifelse(vote_quebec == 4, 1, 0),
          vote_quebec_vert = ifelse(vote_quebec == 5, 1, 0),
-         vote_quebec_autre = ifelse(vote_quebec == 6, 1, 0)) 
+         vote_quebec_autre = ifelse(vote_quebec == 6, 1, 0),
+         ideologie_VD = ideologie, # ajouter VD
+         vote_nationaliste_VD  = vote_nationaliste,
+         participation_VD  = participation,
+         vote_quebec2018_CAQ_VD  = vote_quebec2018_CAQ,
+         vote_quebec2018_PQ_VD  = vote_quebec2018_PQ,
+         vote_quebec2018_PLQ_VD = vote_quebec2018_PLQ,
+         vote_quebec2018_QS_VD  = vote_quebec2018_QS,
+         vote_quebec2018_vert_VD  = vote_quebec2018_vert,
+         vote_quebec2018_autre_VD  = vote_quebec2018_autre,
+         vote_quebec2018_bulletinnul_VD  = vote_quebec2018_bulletinnul,
+         vote_quebec2018_pasvote_VD  = vote_quebec2018_pasvote,
+         vote_US_VD  = vote_US,
+         vote_france_enmarche_VD  = vote_france_enmarche,
+         vote_france_republicains_VD  = vote_france_republicains,
+         vote_france_verts_VD  = vote_france_verts,
+         vote_france_PS_VD  = vote_france_PS,
+         vote_france_RN_VD  = vote_france_RN,
+         vote_france_insoumise_VD  = vote_france_insoumise,
+         vote_canada_liberal_VD  = vote_canada_liberal,
+         vote_canada_conservateur_VD  = vote_canada_conservateur,
+         vote_canada_npd_VD  = vote_canada_npd,
+         vote_canada_bloc_VD = vote_canada_bloc,
+         vote_canada_vert_VD  = vote_canada_vert,
+         vote_canada_autre_VD  = vote_canada_autre,
+         vote_quebec_CAQ_VD  = vote_quebec_CAQ,
+         vote_quebec_PQ_VD  = vote_quebec_PQ,
+         vote_quebec_PLQ_VD  = vote_quebec_PLQ,
+         vote_quebec_QS_VD  = vote_quebec_QS,
+         vote_quebec_vert_VD  = vote_quebec_vert,
+         vote_quebec_autre_VD = vote_quebec_autre,
+         anciens_presidents_VD = anciens_presidents,
+         vote_strategique_VD = vote_strategique,
+         changement_scrutin_VD = ifelse(changement_scrutin < 6, changement_scrutin, NA))
 
 table(dat$securite_immigration)
 table(dat$influence_medias)
@@ -728,7 +761,13 @@ dat <- dat %>%
           vote_france_republicains, vote_france_verts, vote_france_PS, vote_france_RN, vote_france_insoumise, vote_canada_liberal, vote_canada_conservateur, vote_canada_npd, vote_canada_bloc,
           vote_canada_vert, vote_canada_autre, vote_quebec_CAQ, vote_quebec_PQ, vote_quebec_PLQ, vote_quebec_QS, vote_quebec_vert, vote_quebec_autre, anciens_presidents, vote_strategique,
           aucune_preference, preference_parti, satisfaction_modescrutin, vote_chancesfavoris, importance_competence, motivation, premier_choix, strategie_vote2, autrechoix_frequence, 
-          refus_voteCANADA, refus_voteFRANCE) %>% 
+          refus_voteCANADA, refus_voteFRANCE,
+          ideologie_VD, vote_nationaliste_VD, participation_VD, vote_quebec2018_CAQ_VD, vote_quebec2018_PQ_VD, vote_quebec2018_PLQ_VD, 
+          vote_quebec2018_QS_VD, vote_quebec2018_vert_VD, vote_quebec2018_autre_VD, vote_quebec2018_bulletinnul_VD, vote_quebec2018_pasvote_VD, 
+          vote_US_VD, vote_france_enmarche_VD, vote_france_republicains_VD, vote_france_verts_VD, vote_france_PS_VD, vote_france_RN_VD, 
+          vote_france_insoumise_VD, vote_canada_liberal_VD, vote_canada_conservateur_VD, vote_canada_npd_VD, vote_canada_bloc_VD, vote_canada_vert_VD, 
+          vote_canada_autre_VD, vote_quebec_CAQ_VD, vote_quebec_PQ_VD, vote_quebec_PLQ_VD, vote_quebec_QS_VD, vote_quebec_vert_VD, vote_quebec_autre_VD, 
+          anciens_presidents_VD, vote_strategique_VD, changement_scrutin_VD) %>% 
   arrange(annee_naissance, age, emploi, revenu, genre, citoyennete, ethnie, minorite, education, religion, reseau_social, residence, naissance_pays_residence, cohabitation, droit_vote,
           province, naissance_province_residence, classe_sociale, classe_sociale_parents, langue, province_naissance_parents, pays_naissance_parents, climat_social, covid_satisfaction,
           covid_soin, covid_gestion, covid_inquietude, covid_jeune, covid_politiques, immigration_ouverture, immigration_syrie, climat_economie, transition_energetique_taxes,
@@ -748,7 +787,13 @@ dat <- dat %>%
           vote_france_republicains, vote_france_verts, vote_france_PS, vote_france_RN, vote_france_insoumise, vote_canada_liberal, vote_canada_conservateur, vote_canada_npd, vote_canada_bloc,
           vote_canada_vert, vote_canada_autre, vote_quebec_CAQ, vote_quebec_PQ, vote_quebec_PLQ, vote_quebec_QS, vote_quebec_vert, vote_quebec_autre, anciens_presidents, vote_strategique,
           aucune_preference, preference_parti, satisfaction_modescrutin, vote_chancesfavoris, importance_competence, motivation, premier_choix, strategie_vote2, autrechoix_frequence, 
-          refus_voteCANADA, refus_voteFRANCE)
+          refus_voteCANADA, refus_voteFRANCE,
+          ideologie_VD, vote_nationaliste_VD, participation_VD, vote_quebec2018_CAQ_VD, vote_quebec2018_PQ_VD, vote_quebec2018_PLQ_VD, 
+          vote_quebec2018_QS_VD, vote_quebec2018_vert_VD, vote_quebec2018_autre_VD, vote_quebec2018_bulletinnul_VD, vote_quebec2018_pasvote_VD, 
+          vote_US_VD, vote_france_enmarche_VD, vote_france_republicains_VD, vote_france_verts_VD, vote_france_PS_VD, vote_france_RN_VD, 
+          vote_france_insoumise_VD, vote_canada_liberal_VD, vote_canada_conservateur_VD, vote_canada_npd_VD, vote_canada_bloc_VD, vote_canada_vert_VD, 
+          vote_canada_autre_VD, vote_quebec_CAQ_VD, vote_quebec_PQ_VD, vote_quebec_PLQ_VD, vote_quebec_QS_VD, vote_quebec_vert_VD, vote_quebec_autre_VD, 
+          anciens_presidents_VD, vote_strategique_VD, changement_scrutin_VD)
 
 custom_glimpse <- function(df) {
   data.frame(
@@ -763,6 +808,7 @@ variable_nb <- custom_glimpse(dat)
 #### Variables class ####
 class(dat$education)
 table(dat$education)
+class(dat$participation_VD)
 
 #### Group variable types #####
 
@@ -950,11 +996,46 @@ continuous_variables <- c("Année de naissance" = 1,
                           "Vote stratégique" = 167,
                           "Importance compétence" = 172)
 
+# dependent variables
+dependent_variables <- c("Idéologie" = 179,
+                         "Vote - parti nationaliste" = 180,
+                         "Participation" = 181,
+                         "Québec 2018 - CAQ" = 182,
+                         "Québec 2018 - PQ" = 183,
+                         "Québec 2018 - PLQ" = 184,
+                         "Québec 2018 - QS" = 185,
+                         "Québec 2018 - Vert" = 186,
+                         "Québec 2018 - Autre" = 187,
+                         "Québec 2018 - Bulletin nul" = 188,
+                         "Québec 2018 - Pas voté" = 189,
+                         "Vote - US" = 190,
+                         "Intention de vote France - République en marche" = 191,
+                         "Intention de vote France - Républicains" = 192,
+                         "Intention de vote France - Verts" = 193,
+                         "Intention de vote France - PS" = 194,
+                         "Intention de vote France - RN" = 195,
+                         "Intention de vote France - Insoumise" = 196,
+                         "Intention de vote Canada - Liberal" = 197,
+                         "Intention de vote Canada - Conservateur" = 198,
+                         "Intention de vote Canada - NPD" = 199,
+                         "Intention de vote Canada - Bloc" = 200,
+                         "Intention de vote Canada - Vert" = 201,
+                         "Intention de vote Canada - Autre" = 202,
+                         "Intention de vote Québec - CAQ" = 203,
+                         "Intention de vote Québec - PQ" = 204,
+                         "Intention de vote Québec - PLQ" = 205,
+                         "Intention de vote Québec - QS" = 206,
+                         "Intention de vote Québec - Vert" = 207,
+                         "Intention de vote Québec - Autre" = 208,
+                         "Vote - anciens présidents" = 209,
+                         "Vote stratégique" = 210,
+                         "Changement de scrutin" = 211)
+
 # categorical and dichotomous variables (for cross tabs)
 cat_dicho_variables <- c(categorical_variables,  dichotomous_variables)
 
 # dependent variables only (dichotomous or continuous)
-dependent_variables <- c(continuous_variables, dichotomous_variables)
+#dependent_variables <- c(continuous_variables, dichotomous_variables)
 
 # all variables
 variables <- c(categorical_variables, dichotomous_variables, continuous_variables)
@@ -967,6 +1048,8 @@ table(dat$genre)
 summary(dat$annee_naissance)
 summary(dat$enjeux_chomage)
 summary(dat$vote_strategique)
+summary(dat$participation_VD)
+class(dat$participation_VD)
 
 # paste column names to values of categorical variables
 # test <- dat[categorical_variables]
@@ -976,7 +1059,7 @@ summary(dat$vote_strategique)
 
 #### Save ####
 
-write.csv(dat, "appli-cours/data/sondage_recoded.csv")
+write.csv(dat, "POL-3015/data/sondage_recoded.csv")
 
 
 ###################
