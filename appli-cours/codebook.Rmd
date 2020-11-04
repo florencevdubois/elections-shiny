@@ -720,6 +720,40 @@ l’économie ? [partis cf. intentions de vote dans le pays]\
 Note: deux variables, economieCANADA\_confiance et
 economieFRANCE\_confiance
 
+Canada: 
+
+1. Parti Liberal
+
+2. Parti conservateur
+
+3. NPD
+
+4. Bloc Québécois
+
+5. Parti vert
+
+6. Aucun
+
+7. Autre
+
+France:
+
+1.  Le Parti socialiste
+
+2.  La République en Marche
+
+3. Les Républicains
+
+4.  La France insoumise
+
+5. Europe-Écologie - Les Verts
+
+6.  Le Rassemblement national
+
+7. Aucun
+
+8. Autre
+
 <h3>Immigration [Canada / France] - confiance</h3>
 
 Quel parti pensez-vous être capable de mieux gérer la question
@@ -727,6 +761,36 @@ migratoire ? [choix de réponse cf. choix de vote dans le pays]\
 
 Note: deux variables, immigrationCANADA\_confiance et
 immigrationFRANCE\_confiance
+
+Canada: 
+
+1. Parti Liberal
+
+2. Parti conservateur
+
+3. NPD
+
+4. Bloc Québécois
+
+5. Parti vert
+
+6. Aucun
+
+France:
+
+1.  Le Parti socialiste
+
+2.  La République en Marche
+
+3. Les Républicains
+
+4.  La France insoumise
+
+5. Europe-Écologie - Les Verts
+
+6.  Le Rassemblement national
+
+7. Aucun
 
 <h3>Déficit</h3>
 

@@ -10,9 +10,9 @@ library(datasets)
 library(tidyverse)
 library(stargazer)
 library(knitr)
+library(modelsummary)
 
 #### load data ####
-#opinion <- read.csv("data/opinion.csv") 
 d <- read.csv("data/sondage_recoded.csv") %>% dplyr::select(-X)
 
 # categorical variables - 101 variables
@@ -42,7 +42,7 @@ categorical_variables <- c("Emploi" = 3,
                            "Confiance - police" = 35,
                            "Sécurité - quartier" = 36,
                            "Sécurité - gouvernement" = 37,
-                           "Sécurité - immigration" = 38,
+                           #"Sécurité - immigration" = 38,
                            "Sécurité - frontières" = 39, 
                            "Immigration - quotas" = 40,
                            "Mninorités - partis" = 41,
@@ -96,7 +96,7 @@ categorical_variables <- c("Emploi" = 3,
                            "Plateforme" = 116,
                            "Couverture - influence" = 117,
                            "Médias - neutralité" = 118,
-                           "Influence des médias sur l'élection" = 119,
+                           #"Influence des médias sur l'élection" = 119,
                            "Biais médias" = 120, 
                            "Chaînes - indépendance" = 121,
                            "Niveau d'information" = 122,
@@ -199,11 +199,67 @@ continuous_variables <- c("Année de naissance" = 1,
                           "Vote stratégique" = 167,
                           "Importance compétence" = 172)
 
+# dependent variables
+dependent_variables <- c("Participation" = 136,
+                         "Québec 2018 - CAQ" = 137,
+                         "Québec 2018 - PQ" = 138,
+                         "Québec 2018 - PLQ" = 139, 
+                         "Québec 2018 - QS" = 140,
+                         "Québec 2018 - PVQ" = 141,
+                         "Québec 2018 - Autre" = 142,
+                         "Québec 2018 - Bulletin nul" = 143,
+                         "Québec 2018 - Pas voté" = 144,
+                         "Vote - US" = 145,
+                         "Vote - même parti" = 147,
+                         "Intention de vote France - République en marche" = 148,
+                         "Intention de vote France - Républicains" = 149, 
+                         "Intention de vote France - Verts" = 150,
+                         "Intention de vote France - PS" = 151,
+                         "Intention de vote France - RN" = 152,
+                         "Intention de vote France - France insoumise" = 153,
+                         "Intention de vote Canada - Libéral" = 154,
+                         "Intention de vote Canada - Conservateur" = 155,
+                         "Intention de vote Canada - NPD" = 156,
+                         "Intention de vote Canada - Bloc" = 157,
+                         "Intention de vote Canada - Vert" = 158,
+                         "Intention de vote Canada - Autre" = 159,
+                         "Intention de vote Québec - CAQ" = 160,
+                         "Intention de vote Québec - PQ" = 161,
+                         "Intention de vote Québec - PLQ" = 162,
+                         "Intention de vote Québec - QS" = 163,
+                         "Intention de vote Québec - PVQ" = 164,
+                         "Intention de vote Québec - Autre" = 165,
+                         "Covid - inquiétude" = 27, 
+                         "Corruption - participation" = 43,
+                         "Corruption - évaluation des partis" = 44, 
+                         "Enjeux - chômage" = 57,
+                         "Enjeux - environnement" = 58, 
+                         "Enjeux - immigration" = 59,
+                         "Enjeux - économie" = 60, 
+                         "Enjeux - éducation" = 61,
+                         "Enjeux - santé" = 62,
+                         "Importance - immigration" = 63,
+                         "Idéologie" = 66,
+                         "Importance - chef" = 83, 
+                         "Importance traits" = 89,
+                         "Traits - importance - intégrité" = 90, 
+                         "Traits - importance - leadership" = 91,
+                         "Traits - importance - compétence" = 92, 
+                         "Traits - importance - empathie" = 93,
+                         "Vote parti nationaliste" = 97, 
+                         "Thermomètre partis - Libéral" = 99, 
+                         "Thermomètre partis - Conservateur" = 100,
+                         "Thermomètre partis - NPD" = 101, 
+                         "Thermomètre partis - Bloc" = 102,
+                         "Thermomètre partis - Parti vert" = 103, 
+                         "Vote stratégique" = 167,
+                         "Importance compétence" = 172)
+
 # categorical and dichotomous variables (for cross tabs)
 cat_dicho_variables <- c(categorical_variables,  dichotomous_variables)
 
 # dependent variables only (dichotomous or continuous)
-dependent_variables <- c(continuous_variables, dichotomous_variables)
+#dependent_variables <- c(continuous_variables, dichotomous_variables)
 
 # all variables
 variables <- c(categorical_variables, dichotomous_variables, continuous_variables)
@@ -297,12 +353,15 @@ ui <- navbarPage("Les élections (POL 3015)",
                               helpText("Sélectionez deux variables pour créer un tableau croisé."),
                               selectInput("var1",
                                           label = "Sélectionnez une variable pour les lignes...",
-                                          choice = cat_dicho_variables),
+                                          choice = c(Choisissez = '', cat_dicho_variables)),
                             selectInput("var2",
                                         label = "Sélectionnez une variable pour les colonnes...",
-                                        choice = cat_dicho_variables)),
+                                        choice = c(Choisissez = '', cat_dicho_variables))),
                             mainPanel(h3("Votre tableau croisé"),
-                                      tableOutput("crosstab"))
+                                      p("Seules les variables catégorielles et dichotomiques peuvent être utilisées pour créer un tableau croisé."), 
+                                      p("Consultez le codebook dans l'onglet", em("Description des variables"), "pour connaître la signification des catégories de réponse pour les variables dichotomiques."),
+                                      #tableOutput("crosstab"),
+                                      tableOutput("crosstab2"))
                           )
                           ),
                  #### regressions panel ####
@@ -311,10 +370,10 @@ ui <- navbarPage("Les élections (POL 3015)",
                             sidebarPanel(
                               helpText("Sélectionez une variable dépendante, une variable indépendante et (si nécessaire) des variables de contrôle pour l'analyse de régression."),
                               selectInput("dv",
-                                          label = "Sélectionnez une variable dépendante...",
+                                          label = "Sélectionnez une variable dépendante (Y)...",
                                           choice = c(Choisissez='', dependent_variables)),
                               selectInput("iv",
-                                          label = "Sélectionnez une variable indépendante...",
+                                          label = "Sélectionnez une variable indépendante (X)...",
                                           choice = c(Choisissez='', variables)),
                               selectInput("controls",
                                           label = "Sélectionnez une ou des variables de contrôle...",
@@ -328,11 +387,24 @@ ui <- navbarPage("Les élections (POL 3015)",
                               #                    label = "Si vous avez décidé de faire l'analyse sur les répondants d'une même nationalité, sélectionnez-la ici...",
                               #                    choices = c("Canadienne","Autre"),
                               #                    selected = c("Canadienne","Autre"))),
-                            mainPanel(h3("Résultats de votre analyse de régression"),
-                                      p("Explication des colonnes ici."),
+                            mainPanel(h3("Votre analyse de régression"),
+                                      h4("À garder en tête"),
+                                      p("Seules les variables continues et dichotomiques peuvent être utlisées comme variables dépendantes (y)."),
+                                      p("Certaines questions de sondage ont été répondues par peu de personnes. Si vous choisissez une telle variable comme variable dépendante, il se peut qu'aucun coefficient ne puisse être estimé. De plus, si deux variables (indépendante et/ou de contrôle) sont parfaitement corrélées entre elles, le modèle retournera des valeurs manquantes pour les estimés (NA). C'est un élément important à considérer quand viendra le temps de choisir les variables à inclure dans votre modèle. Il est aussi important de choisir des variables qui proviennent du même "),
+                                      p("Évidemment, il est aussi important de choisir des variables qui proviennent du même 'sous-échantillon' de personnes. Par exemple, si vous voulez connaître l'effet de la variable economieFRANCE_confiance (à quel parti faites-vous confiance pour la gestion de l'économie, en France) sur les intentions de vote, votre variable dépendante doit aussi se rapporter aux partis français."),
+                                      h4("Résultats"),
                                       tableOutput("regression"),
                                       h4("Informations additionnelles sur votre modèle"),
-                                      verbatimTextOutput("regression_stats"))
+                                      verbatimTextOutput("regression_stats"),
+                                      h4("Interprétation"),
+                                      p("Interprétez le coefficient de régression pour connaître l'influence de la variable indépendante sur la variable dépendante."),
+                                      p("Lorsque la variable dépendante est une variable continue, on interprète l'effet d'une augmentation dans la variable indépendante sur le niveau de la variable dépendante. Par exemple, si la variable dépendante est l'idéologie (codée de 0 à 10), un coefficient positif signifie qu'une augmentation dans la variable indépendante entraîne une augmentation dans l'échelle de l'idéologie"),
+                                      p("Lorsque la variable dépendante est une variable dichotomique (codée 0/1 ou 1/2), on interprète l'effet d'une augmentation dans la variable indépendante sur la probabilité que la variable dépendante prenne la valeur supérieure. Par exemple, si la variable dépendante est le vote pour le Parti Québécois en 2018 (codée 0 ou 1), un coefficient positif signifie qu'une augmentation dans la variable indépendante augmente la probabilité que le répondant ait voté pour le Parti Québécois en 2018."),
+                                      h4("Notes"),
+                                      p("L'erreur-type mesure l'incertitude du coefficient. Plus l'erreur-type est grande par rapport au coefficient, plus ce dernier est incertain."),
+                                      p("La statistique t permet de déterminer le niveau de signification statistique du coefficient. Normalement, lorsque la statistique t est supérieure à 2, on estime que le coefficient est statistiquement significatif."),
+                                      p("La valeur p est une autre mesure de signification statistique. Elle exprime la probabilité d'obtenir un tel coefficient s'il n'existe en réalité pas de relation entre x et y dans la population. Nous voulons que la probabilité soit faible, soit moins de .05 (ou 5 %)."),
+                                      p("Les modèles estimés sont des modèles de régression linéaire par les moindres carrés (OLS)."))
                           ))
   
 )
@@ -408,7 +480,24 @@ server <- function(input, output) {
   })
   
   #### outputs, crosstabs ####
-  output$crosstab <- renderTable(as.data.frame.matrix(table(d[, as.numeric(input$var1)], d[, as.numeric(input$var2)], useNA = "always")), rownames = T)
+  #output$crosstab <- renderTable(as.data.frame.matrix(table(d[, as.numeric(input$var1)], d[, as.numeric(input$var2)], useNA = "always")), rownames = T)
+  
+  #### outputs, crosstabs ####
+  output$crosstab2 <- renderTable({
+    
+    validate(need(input$var1, 'Un tableau apparaîtra lorsque vous aurez sélectionné deux variables.'))
+    validate(need(input$var2, 'Un tableau apparaîtra lorsque vous aurez sélectionné deux variables.'))
+    
+    x <- d[, as.numeric(input$var1)]
+    y <- d[, as.numeric(input$var2)]
+    datatable <- data.frame(x, y)
+
+    # datasummary((`Variable 1`=x) * (`Variable 2`=y) + 1 ~ (`Nombre d'observations` = 1) + (`Pourcentage` = Percent()),
+    #             data = datatable)
+    datasummary((` ` = x) ~ y + (`Total` = 1) + (`Pourcentage` = Percent()),
+                data = datatable)
+    
+  })
   
   #### outputs, regressions ####
   # set-up for reactive output --- we specify that the regression should include only y and x if there are no controls,
@@ -422,7 +511,7 @@ server <- function(input, output) {
       model <- lm(y ~ x, data = datatemp1) %>% 
         broom::tidy() %>% 
         mutate(term = ifelse(term == "(Intercept)", "constante", 
-                             ifelse(term == "x", names(d[as.numeric(input$iv)]), term))) %>% # ifelse(str_detect(term, "x"), str_remove(term, "x"), # changed as.numeric(input$iv) to input$iv
+                             ifelse(str_detect(term, "x"), str_replace(term, "x", names(d[as.numeric(input$iv)])), term))) %>% # ifelse(str_detect(term, "x"), str_remove(term, "x"),
         rename(` ` = term,
                Coefficient = estimate,
                `Erreur-type` = std.error,
@@ -438,9 +527,8 @@ server <- function(input, output) {
       model <- lm(y ~ ., data = datatemp2) %>% 
         broom::tidy() %>% 
         mutate(term = ifelse(term == "(Intercept)", "constante", 
-                             ifelse(term == "x", names(d[as.numeric(input$iv)]),  # changed as.numeric(input$iv) to input$iv
-                                    #ifelse(str_detect(term, "x"), str_remove(term, "x"), 
-                                           ifelse(term == "control", names(d[as.numeric(input$controls)]), term)))) %>% # ifelse(str_detect(term, "control"), str_remove(term, "control") # changed as.numeric(input$controls) to input$controls
+                             ifelse(str_detect(term, "x"), str_replace(term, "x", names(d[as.numeric(input$iv)])),  
+                                           ifelse(str_detect(term, "control"), str_replace(term, "control", names(d[as.numeric(input$controls)])), term)))) %>% # ifelse(str_detect(term, "control"), str_remove(term, "control") # names(d[as.numeric(input$controls)])
         rename(` ` = term,
                Coefficient = estimate,
                `Erreur-type` = std.error,

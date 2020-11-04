@@ -5,8 +5,8 @@ account: florencevdubois
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2434054
-bundleId: 3731620
+bundleId: 3817429
 url: https://florencevdubois.shinyapps.io/appli-cours/
-when: 1602534314.90145
+when: 1604445549.5858
 asMultiple: FALSE
 asStatic: FALSE
