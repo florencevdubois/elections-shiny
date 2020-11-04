@@ -1,6 +1,6 @@
 library(tidyverse)
 
-dat <- read.csv("appli-cours/data/sondage_raw.csv", sep = ";")
+dat <- read.csv("POL-3015/data/sondage_raw.csv", sep = ";")
 
 #### Recode ####
 summary(dat)

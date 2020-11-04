@@ -285,7 +285,7 @@ ui <- navbarPage("Les élections (POL 3015)",
                             p(br()),
                             p("Ruth Dassonneville, Professeure agrégée, Département de science politique de l'Université de Montréal; enseignante du cours POL 3015", style = "font-size:14px"), 
                             p("Gestion de la banque de données par Alexandra Jabbour, doctorante en science politique à l'Université de Montréal", style = "font-size:14px"),
-                            p("Programmation de l'application web par Florence Vallée-Dubois, doctorante en science politique à l'Université de Montréal", style = "font-size:14px"),
+                            p("Programmation de l'application web (Shiny App) par Florence Vallée-Dubois, doctorante en science politique à l'Université de Montréal", style = "font-size:14px"),
                             HTML("Site inspiré de l'application créée par Dave Armstrong pour <a href='https://quantoid.shinyapps.io/CES_2020/'>analyser les données de l'étude électorale canadienne</a>"))
                             ),
                  #### codebook panel ####
