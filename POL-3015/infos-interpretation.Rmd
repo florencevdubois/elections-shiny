@@ -1,5 +1,5 @@
 ---
-title: "Interprétation des résultats de régression linéaire"
+title: "Guide pour l'interprétation des résultats de régression linéaire"
 output: html_document
 ---
 
@@ -7,22 +7,58 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Concepts
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+1. __Variable dépendante (y)__: Phénomène à expliquer. _Par exemple_, nous pourrions vouloir expliquer la décision d'un gouvernement d'augmenter l'impôt sur le revenu. Notre variable dépendante pourrait alors prendre deux valeurs: 1 = le gouvernement a décidé d'augmenter l'impôt sur le revenu, ou 0 = le gouvernement n'a pas décidé d'augmenter l'impôt sur le revenu.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+2. __Variable indépendante (x)__: Facteur qui contribue à expliquer la variable dépendante. _Par exemple_, nous pourrions vouloir vérifier si l'orientation gauche-droite du gouvernement a un effet sur sa décision d'augmenter l'impôt sur le revenu. Notre variable indépendante pourrait prendre 5 catégories: 1 = gouvernement de droite, 2 = gouvernement de centre-droite, 3 = gouvernement de centre, 4 = gouvernement de centre-gauche et 5 = gouvernement de gauche.
 
-```{r cars}
-summary(cars)
-```
+3. __Variables de contrôle__: Variables qui pourraient potentiellement affecter la variable indépendante et la variable dépendante. _Par exemple_, le fait d'être dans une récession peut affecter à la fois la décision du gouvernement d'augmenter les impôts et l'orientation idéologique du gouvernement (s'il y a des élections durant la récession, par exemple). Nous pourrions donc ajouter une variable de contrôle dans la régression, qui peut prendre deux valeurs: 1 = le pays est en récession, 0 = le pays n'est pas en récession.
 
-## Including Plots
+4. __Coefficient de régression__: Le coefficient de régression est l'effet d'un changement dans la variable indépendante (x) sur la variable dépendante (y). Il peut être négatif, on dit alors que les variables x et y sont positivement corrélées. Ou négatif, on dit alors que les variables x et y sont négativement corrélées. Nous sommes surtout intéressés par le coefficient de la variable indépendante, pas des variables de contrôle. Pour savoir comment interpréter le chiffre du coefficient, voir plus bas.
 
-You can also embed plots, for example:
+5. __Signification statistique__: Le coefficient de régression nous indique si les variables x et y sont liées dans le cadre de notre échantillon seulement. Pour savoir si la relation entre les variables a des chances de se trouver aussi dans la population d'où provient l'échantillon, nous faisons un test de signification statistique. Le test nous indique s'il y a de bonnes chances que la relation que nous avons trouvée soit le fruit du hasard. Nous voulons que ces chances soient le plus faible possible. En général, nous voulons qu'il y ait 1 chance sur 20 (5%) ou moins que la relation soit le fruit du hasard. 
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+## Interprétation du coefficient de régression
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+### Quand la variable dépendante est continue...
+
+1. __Et que la variable indépendante est continue__: Le coefficient représente l'effet d'une augmentation de 1 point dans la variable indépendante sur la variable dépendante. 
+
+Exemple: La variable dépendante est l'appui populaire au Parti Québécois (de 0 à 100). La variable indépendante est le pourcentage de francophones dans une circonscriptions (aussi de 0 à 100). Un coefficient égal à 2 indique qu'une augmentation d'un point de pourcentage dans le nombre de francophones est associé avec une augmentation de 2 points dans l'appui populaire au Parti Québécois.
+
+2. __Et que la variable indépendante est dichotomique__: Le coefficient représente l'effet d'appartenir à la valeur de x la plus élevée sur la variable dépendante, en comparaison avec la valeur de x la plus faible.
+
+Exemple: La variable dépendante est l'appui populaire au Parti Québécois (de 0 à 100). La variable indépendante est le fait d'être une  circonscription urbaine, vs. rurale (les circonscriptions urbaines sont codées 1, les circonscriptions rurales sont codées 0). Un coefficient égal à -2 indique que l'appui au PQ est 2 points plus faible dans les circonscriptions urbaines, en comparaison avec les circonscriptions rurales. 
+
+3. __Et que la variable indépendante est catégorielle__: Quand un variable x est catégorielle, toutes les catégories ont leur propre coefficient de régression, sauf une. Cette catégorie est la catégorie de référence. Chaque coefficient s'interprète en comparaison avec la catégorie de référence. Chaque coefficient représente l'effet d'appartenir à la catégorie donnée sur la variable dépendante, en comparaison avec la catégorie de référence.
+
+Exemple: La variable dépendante est l'appui populaire au Parti Québécois (de 0 à 100). La variable indépendante est le fait d'être une  circonscription de Montréal vs. de Québec vs. de toute autre région (3 catégories). Dans le tableau de régression, seulement 2 de ces 3 catégories auront un coefficient de régression. La 3e, qui est absente, est la catégorie de référence. Si Montréal est la catégorie de référence et que le coefficient associé à "Québec" est égal à 3, cela signifie que l'appui au PQ est 3 points plus élevé dans les circonscriptions de Québec, en comparaison avec les circonscriptions de Montréal.
+
+### Quand la variable dépendante est dichotomique...
+
+Lorsque la variable dépendante est une variable dichotomique (codée 0/1 ou 1/2), on interprète l'effet d'une augmentation dans la variable indépendante sur la _probabilité_ que la variable dépendante prenne la valeur la plus élevée. 
+
+1. __Et que la variable indépendante est continue__: Le coefficient représente l'effet d'une augmentation de 1 point dans la variable indépendante sur la probabilité que la variable dépendante prenne la valeur supérieure. 
+
+Exemple: La variable dépendante est l'élection du Parti Québécois dans une circonscription (si le parti a été élu, la variable égale 1, sinon elle égale 0). La variable indépendante est le pourcentage de francophones dans une circonscriptions (aussi de 0 à 100). Un coefficient égal à 2 indique qu'une augmentation d'un point de pourcentage dans le nombre de francophones est associé avec une augmentation de 2 points dans la _probabilité_ que le PQ soit élu dans une circonscription.
+
+2. __Et que la variable indépendante est dichotomique__: Le coefficient représente l'effet d'appartenir à la valeur de x la plus élevée (en comparaison avec la valeur de x la plus faible) sur la probabilité que la variable dépendante prenne la valeur supérieure.
+
+Exemple: La variable dépendante est l'élection du Parti Québécois dans une circonscription (si le parti a été élu, la variable égale 1, sinon elle égale 0). La variable indépendante est le fait d'être une  circonscription urbaine, vs. rurale (les circonscriptions urbaines sont codées 1, les circonscriptions rurales sont codées 0). Un coefficient égal à -2 indique que la _probabilité_ que le PQ soit élu est 2 points plus faible dans les circonscriptions urbaines, en comparaison avec les circonscriptions rurales.
+
+3. __Et que la variable indépendante est catégorielle__: Quand un variable x est catégorielle, toutes les catégories ont leur propre coefficient de régression, sauf une. Cette catégorie est la catégorie de référence. Chaque coefficient s'interprète en comparaison avec la catégorie de référence. Chaque coefficient représente l'effet d'appartenir à la catégorie donnée (en comparaison avec la catégorie de référence) sur la probabilité que la variable dépendante prenne la valeur supérieure.
+
+Exemple: La variable dépendante est l'élection du Parti Québécois dans une circonscription (si le parti a été élu, la variable égale 1, sinon elle égale 0). La variable indépendante est le fait d'être une  circonscription de Montréal vs. de Québec vs. de toute autre région (3 catégories). Dans le tableau de régression, seulement 2 de ces 3 catégories auront un coefficient de régression. La 3e, qui est absente, est la catégorie de référence. Si Montréal est la catégorie de référence et que le coefficient associé à "Québec" est égal à 3, cela signifie que la _probabilité_ que le PQ soit élu est 3 points plus élevé dans les circonscriptions de Québec, en comparaison avec les circonscriptions de Montréal.
+
+## Interprétation du niveau de signification statistique
+
+Il y a deux façons de savoir si la relation entre x et y est statistiquement significative à partir du tableau de régression. 
+
+1. __La statistique t__: Lorsque la statistique t est supérieure à 2, on estime que le coefficient est statistiquement significatif au niveau généralement accepté en science politique (1 fois sur 20, ou 5%). Il s'agit d'un raccourci, mais il fonctionne la plupart du temps.
+
+2. __La valeur p__: La valeur p exprime la probabilité d'obtenir un tel coefficient s'il n'existe en réalité pas de relation entre x et y dans la population. Nous voulons que la probabilité soit inférieure à .05 (ou 5 %). Si c'est le cas, nous pouvons dire que le coefficient est statistiquement significatif au niveau généralement accepté en science politique.
+
+
+
+

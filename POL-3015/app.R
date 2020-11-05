@@ -367,24 +367,25 @@ ui <- navbarPage("Les élections (POL 3015)",
                               #                    label = "Si vous avez décidé de faire l'analyse sur les répondants d'une même nationalité, sélectionnez-la ici...",
                               #                    choices = c("Canadienne","Autre"),
                               #                    selected = c("Canadienne","Autre"))),
-                            mainPanel(h3("Votre analyse de régression"),
-                                      h4("À garder en tête"),
-                                      p("Seules les variables continues et dichotomiques peuvent être utlisées comme variables dépendantes (y)."),
-                                      p("Certaines questions de sondage ont été répondues par peu de personnes. Si vous choisissez une telle variable comme variable dépendante, il se peut qu'aucun coefficient ne puisse être estimé. De plus, si deux variables (indépendante et/ou de contrôle) sont parfaitement corrélées entre elles, le modèle retournera des valeurs manquantes pour les estimés (NA). C'est un élément important à considérer quand viendra le temps de choisir les variables à inclure dans votre modèle. Il est aussi important de choisir des variables qui proviennent du même "),
-                                      p("Évidemment, il est aussi important de choisir des variables qui proviennent du même 'sous-échantillon' de personnes. Par exemple, si vous voulez connaître l'effet de la variable economieFRANCE_confiance (à quel parti faites-vous confiance pour la gestion de l'économie, en France) sur les intentions de vote, votre variable dépendante doit aussi se rapporter aux partis français."),
-                                      h4("Résultats"),
-                                      tableOutput("regression"),
-                                      h4("Informations additionnelles sur votre modèle"),
-                                      verbatimTextOutput("regression_stats"),
-                                      h4("Interprétation"),
-                                      p("Interprétez le coefficient de régression pour connaître l'influence de la variable indépendante sur la variable dépendante."),
-                                      p("Lorsque la variable dépendante est une variable continue, on interprète l'effet d'une augmentation dans la variable indépendante sur le niveau de la variable dépendante. Par exemple, si la variable dépendante est l'idéologie (codée de 0 à 10), un coefficient positif signifie qu'une augmentation dans la variable indépendante entraîne une augmentation dans l'échelle de l'idéologie"),
-                                      p("Lorsque la variable dépendante est une variable dichotomique (codée 0/1 ou 1/2), on interprète l'effet d'une augmentation dans la variable indépendante sur la probabilité que la variable dépendante prenne la valeur supérieure. Par exemple, si la variable dépendante est le vote pour le Parti Québécois en 2018 (codée 0 ou 1), un coefficient positif signifie qu'une augmentation dans la variable indépendante augmente la probabilité que le répondant ait voté pour le Parti Québécois en 2018."),
-                                      h4("Notes"),
-                                      p("L'erreur-type mesure l'incertitude du coefficient. Plus l'erreur-type est grande par rapport au coefficient, plus ce dernier est incertain."),
-                                      p("La statistique t permet de déterminer le niveau de signification statistique du coefficient. Normalement, lorsque la statistique t est supérieure à 2, on estime que le coefficient est statistiquement significatif."),
-                                      p("La valeur p est une autre mesure de signification statistique. Elle exprime la probabilité d'obtenir un tel coefficient s'il n'existe en réalité pas de relation entre x et y dans la population. Nous voulons que la probabilité soit faible, soit moins de .05 (ou 5 %)."),
-                                      p("Les modèles estimés sont des modèles de régression linéaire par les moindres carrés (OLS)."))
+                            mainPanel(
+                              tabsetPanel(
+                                tabPanel("Analyse",
+                                      #h3("Votre analyse de régression"),
+                                         h4("À garder en tête"),
+                                         p("Seules les variables continues et dichotomiques peuvent être utlisées comme variables dépendantes (y)."),
+                                         p("Certaines questions de sondage ont été répondues par peu de personnes. Si vous choisissez une telle variable comme variable dépendante, il se peut qu'aucun coefficient ne puisse être estimé. De plus, si deux variables (indépendante et/ou de contrôle) sont parfaitement corrélées entre elles, le modèle retournera des valeurs manquantes pour les estimés (NA). C'est un élément important à considérer quand viendra le temps de choisir les variables à inclure dans votre modèle. Il est aussi important de choisir des variables qui proviennent du même "),
+                                         p("Évidemment, il est aussi important de choisir des variables qui proviennent du même 'sous-échantillon' de personnes. Par exemple, si vous voulez connaître l'effet de la variable economieFRANCE_confiance (à quel parti faites-vous confiance pour la gestion de l'économie, en France) sur les intentions de vote, votre variable dépendante doit aussi se rapporter aux partis français."),
+                                         h4("Résultats"),
+                                         tableOutput("regression"),
+                                         h4("Informations additionnelles sur votre modèle"),
+                                         verbatimTextOutput("regression_stats"),
+                                         h4("Notes"),
+                                         p("Pour vous aider dans l'interprétation des résultats, consultez l'onglet 'Aide'."),
+                                         p("Les modèles estimés sont des modèles de régression linéaire par les moindres carrés (OLS).")),
+                              tabPanel("Aide",
+                                       includeHTML("infos-interpretation.html"))
+                              )
+                            )
                           ))
   
 )
