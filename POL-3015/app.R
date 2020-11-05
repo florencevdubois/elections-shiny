@@ -281,8 +281,16 @@ ui <- navbarPage("Les élections (POL 3015)",
                               des variables qui permettent de mesurer les comportements politiques des répondant.e.s (Ont-ils voté aux dernières élections? Sont-ils intéressés par la politique? etc.),
                               des variables qui mesurent leurs attitudes (confiance envers la police, préférence quant au type de mode de scrutin, etc.) et plusieurs autres variables pertinentes.", style = "font-size:16px"),
                             p("L'échantillon est de 789 répondant.e.s, mais certaines personnes n'ont pas répondu à toutes les questions du sondage.
-                              Le sondage a été mené entre le 21 et le 31 octobre 2020 via un recrutement non-probabiliste.", style = "font-size:16px")),
-                          fluidPage(includeHTML("codebook.html"))
+                              Le sondage a été mené entre le 21 et le 31 octobre 2020 via un recrutement non-probabiliste.", style = "font-size:16px"),
+                            h2("Codebook")),
+                          tabsetPanel(
+                            tabPanel("Socio-démographiques", includeHTML("codebook-sociodem.html")),
+                            tabPanel("Enjeux", includeHTML("codebook-enjeux.html")),
+                            tabPanel("Attitudes politiques", includeHTML("codebook-att.html")),
+                            tabPanel("Information", includeHTML("codebook-info.html")),
+                            tabPanel("Vote", includeHTML("codebook-vote.html"))
+                          )
+                          #fluidPage(includeHTML("codebook.html"))
                  ),
                  #### descriptive statistics panel ####
                  tabPanel("Statistiques descriptives",

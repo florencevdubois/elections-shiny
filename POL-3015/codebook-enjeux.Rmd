@@ -1,0 +1,554 @@
+---
+title: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<h3>Climat social</h3>
+
+Que pensez-vous d’une manière générale du climat social actuel dans
+votre pays ? S’est-il amélioré, détérioré ou est-il resté stable ?
+
+1.  Amélioré
+
+2.  Détérioré
+
+3.  Resté stable
+
+<h3>Covid - Satisfaction</h3>
+
+Dans quelle mesure êtes-vous satisfait de la gestion du gouvernement en
+place à ce qui a trait à la gestion de la crise sanitaire de la covid-19
+?
+
+1.  Très satisfait
+
+2.  Satisfait
+
+3.  Peu satisfait
+
+4.  Très insatisfait
+
+<h3>Covid - accès aux soins</h3>
+
+Trouvez-vous que la même qualité de soins est accessible en régions que
+dans les grands centres métropolitains ?
+
+1.  Oui
+
+2.  Non
+
+<h3>Covid - Gestion</h3> 
+
+Êtes-vous satisfait avec les efforts du gouvernement pour gérer les
+conséquences négatives de la COVID-19 ?
+
+1.  Très satisfait
+
+2.  Satisfait
+
+3.  Peu satisfait
+
+4.  Très insatisfait
+
+<h3>Covid - inquiétude</h3>
+
+Indiquez sur une échelle de 0 à 10 votre niveau d’inquiétude pour votre
+avenir suite à la crise engendrée par la COVID-19 (0 = Pas du tout
+inquiet, 10 = Très inquiet)
+
+<h3>Covid - jeunes</h3>
+
+Quel parti vous semble le plus concerné par l’avenir des jeunes
+générations face aux répercussions de la COVID-19 ?
+
+1.  Parti libéral
+
+2.  NPD
+
+3.  Parti vert
+
+4.  Parti conservateur
+
+5.  Bloc Québécois
+
+6.  Autre
+
+<h3>Covid - politiques </h3>
+
+Parmi les choix de réponses suivants, choisissez la suggestion qui
+répond le mieux, selon vous, à la question suivante : Comment
+décririez-vous les politiques économiques appliquées par votre
+gouvernement en réponse à la crise économique liée à la pandémie ?
+
+1.  Les politiques économiques appliquées sont idéales dans les
+    circonstances actuelles, et permettent à l’économie du pays de
+    prospérer malgré la présente crise économique liée à la pandémie.
+
+2.  Les politiques économiques appliquées sont adéquates dans les
+    circonstances actuelles, et permettent à l’économie du pays de
+    rester stable malgré la présente crise économique liée à la
+    pandémie.
+
+3.  Les politiques économiques appliquées sont adéquates dans les
+    circonstances actuelles, mais l’économie du pays souffre
+    inévitablement de la présente crise économique liée à la pandémie.
+
+4.  Les politiques économiques appliquées sont mauvaises dans les
+    circonstances actuelles et l’économie du pays en souffre, en plus de
+    souffrir de la présente crise économique liée à la pandémie.
+
+<h3>Immigration - ouverture</h3>
+
+En matière d’ouverture des frontières à l’immigration que souhaitez-vous?
+
+1.  Beaucoup plus d’ouverture
+
+2.  Un peu plus d’ouverture
+
+3.  Neutre
+
+4.  Moins d’ouverture
+
+5.  Beaucoup moins d’ouverture
+
+6.  Je ne sais pas
+
+<h3>Immigration - Syrie</h3>
+
+Les pays devraient refuser l’immigration de réfugiés en provenance de la
+Syrie
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Climat - économie</h3>
+
+Il est important que les gouvernements fassent de la lutte contre les
+changements climatiques une priorité, même si cela veut dire que
+l’économie va en souffrir
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Transition énergétique - taxes</h3>
+
+Le gouvernement en place devrait hausser les taxes et hausser la retenue
+d’impôt dans le but de financer une transition énergétique verte
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Climat - impacts</h3>
+
+Les changements climatiques sont une réalité et nous devons agir dans
+l’urgence pour limiter leurs impacts
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Confiance police</h3>
+
+Vous avez confiance dans la police
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Sécurité - quartier</h3>
+
+Vous vous sentez en sécurité dans votre quartier
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Sécurité - gouvernement</h3>
+
+Il est important d’avoir un gouvernement fort assurant la sécurité
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Sécurité - frontières</h3>
+
+Le gouvernement doit augmenter la sécurité des frontières nationales
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Immigration - quotas</h3>
+
+Il est nécessaire que le gouvernement réduise le nombre d’immigrants
+accueilli annuellement
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Minorités - partis</h3>
+
+Au Canada, lequel des partis suivants associez-vous le plus avec les
+minorités visibles et les immigrants ?
+
+1.  Parti Libéral
+
+2.  Parti conservateur
+
+3.  NDP
+
+4.  Bloc Québécois
+
+5.  Le Parti vert
+
+6.  Autre
+
+7.  Je ne sais pas
+
+<h3>Corruption</h3>
+
+Estimez-vous que la corruption (comme par exemple recevoir des
+pots-de-vin) est répandue parmi les responsables politiques de votre
+pays?
+
+1.  Très répandue
+
+2.  Assez répandue
+
+3.  Peu répandue
+
+4.  Pas du tout répandue
+
+<h3>Corruption - participation</h3>
+
+Sur une échelle de 0 à 10, notez la force qu’un scandale de corruption
+peut avoir comme influence sur votre participation électorale ?
+
+<h3>Corruption - évaluation des partis</h3>
+
+Quelle est votre évaluation d’un parti politique lorsqu’il est accusé de
+corruption, 0 étant aucun changement d’opinion et 10 étant opinion très
+impactée.
+
+<h3>Mondialisation</h3>
+
+D’une manière générale, diriez-vous que vous avez une bonne ou une
+mauvaise opinion de la mondialisation ?
+
+1.  Très bonne opinion
+
+2.  Plutôt bonne opinion
+
+3.  Ni bonne ni mauvaise opinion
+
+4.  Plutôt mauvaise opinion
+
+5.  Très mauvaise opinion
+
+<h3>Économie - évaluation sociotropique</h3>
+
+Depuis un an, l’économie de votre pays s’est-elle améliorée, détériorée,
+ou restée à peu près la même ?
+
+1.  Améliorée
+
+2.  Détériorée
+
+3.  Restée à peu près la même
+
+<h3>Économie - évaluation égotropique</h3>
+
+Depuis un an, votre situation financière s’est-elle améliorée,
+détériorée, ou restée à peu près la même ?
+
+1.  Améliorée
+
+2.  Détériorée
+
+3.  Restée à peu près la même
+
+<h3>Économie - satisfaction</h3>
+
+Quel est votre degré général de satisfaction à l’égard de votre
+situation économique actuelle ?
+
+1.  Très satisfaisant
+
+2.  Assez satisfaisant
+
+3.  Peu satisfaisant
+
+4.  Pas du tout satisfaisant
+
+5.  Sans opinion
+
+<h3>Économie - Préoccupation</h3>
+
+À quel point la situation économique dans votre pays vous préoccupe
+t-elle ?
+
+1.  Grandement
+
+2.  Moyennement
+
+3.  Peu
+
+4.  Pas du tout
+
+<h3>Économie - critères</h3>
+
+Parmi les choix de réponses suivants, choisissez laquelle répond le
+mieux, selon vous, à la question suivante : Comment évaluerez-vous
+l’économie de votre pays aux prochaines élections ?
+
+1.  Je vais faire un bilan des politiques économiques mises en place
+    pendant le mandat du chef d’État sortant, évaluer s’il est bon ou
+    mauvais, et soutenir un candidat notamment en fonction de ces
+    données.
+
+2.  Je vais davantage m’intéresser aux politiques économiques proposées
+    par les différents partis durant la campagne électorale, et soutenir
+    un candidat notamment en fonction de ces données.
+
+3.  Je vais faire un croisement entre les politiques économique du
+    gouvernement et les perspectives économiques futures proposées par
+    les différents partis politiques, et soutenir un candidat notamment
+    en fonction de ces données.
+
+<h3>Économie [Canada / France]- confiance</h3>
+
+A quel parti politique faites-vous confiance en terme de gestion de
+l’économie ? [partis cf. intentions de vote dans le pays]\
+
+Note: deux variables, economieCANADA\_confiance et
+economieFRANCE\_confiance
+
+Canada: 
+
+1. Parti Liberal
+
+2. Parti conservateur
+
+3. NPD
+
+4. Bloc Québécois
+
+5. Parti vert
+
+6. Aucun
+
+7. Autre
+
+France:
+
+1.  Le Parti socialiste
+
+2.  La République en Marche
+
+3. Les Républicains
+
+4.  La France insoumise
+
+5. Europe-Écologie - Les Verts
+
+6.  Le Rassemblement national
+
+7. Aucun
+
+8. Autre
+
+<h3>Immigration [Canada / France] - confiance</h3>
+
+Quel parti pensez-vous être capable de mieux gérer la question
+migratoire ? [choix de réponse cf. choix de vote dans le pays]\
+
+Note: deux variables, immigrationCANADA\_confiance et
+immigrationFRANCE\_confiance
+
+Canada: 
+
+1. Parti Liberal
+
+2. Parti conservateur
+
+3. NPD
+
+4. Bloc Québécois
+
+5. Parti vert
+
+6. Aucun
+
+France:
+
+1.  Le Parti socialiste
+
+2.  La République en Marche
+
+3. Les Républicains
+
+4.  La France insoumise
+
+5. Europe-Écologie - Les Verts
+
+6.  Le Rassemblement national
+
+7. Aucun
+
+<h3>Déficit</h3>
+
+Que devrait faire le gouvernement de votre pays pour aider l’économie :
+équilibrer le budget ou produire un déficit ?
+
+1.  Équilibrer le budget
+
+2.  Produire un déficit
+
+<h3>Représentation des minorités</h3>
+
+Selon le Centre de recherche-action sur les relations raciales (CRARR),
+on compterait 8% de députés (10 sur 125) qui sont des minorités visibles
+à l’Assemblée Nationale du Québec. Selon vous, la représentation
+politique des minorités visibles devrait être:
+
+1.  Beaucoup plus importante
+
+2.  Plus importante
+
+3.  Ni plus ni moins importante
+
+4.  Moins importante
+
+5.  Beaucoup moins importante
+
+<h3>Enjeux - importants [une variable par enjeu]</h3>
+
+Classez ces enjeux par ordre de l’importance selon vous : chômage,
+environnement, immigration, économie, éducation, santé publique.\
+
+1.  enjeux\_chomage : rang chomage
+
+2.  enjeux\_environnement : rang environnement
+
+3.  enjeux\_immigration : rang immigration
+
+4.  enjeux\_economie : rang économie
+
+5.  enjeux\_education : rang éducation
+
+6.  enjeux\_sante : rang santé publique
+
+<h3>Importance - Immigration</h3>
+
+Sur une échelle de 0 à 10, à quel degré évaluez-vous l’importance de
+l’immigration comme sujet de préoccupation ? 0 indiquant aucune
+inquiétude et 10 comme priorité principale
+
+<h3>Importance - écologie</h3>
+
+Quelle attention accordez-vous à l’écologie ?
+
+1.  Beaucoup
+
+2.  Un peu
+
+3.  Aucune
+
+4.  Ne sais pas
+
+<h3>Inquiétude - attentats</h3>
+
+[Si le répondant est Français] Suite aux attentats qu’a connu la France
+depuis 2015, êtes-vous:
+
+1.  particulièrement inquiet
+
+2.  plutôt inquiet
+
+3.  peu inquiet
+
+4.  pas du tout inquiet
+
+5.  sans opinion
+

@@ -1,0 +1,306 @@
+---
+title: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<h3>Participation</h3>
+
+Pensez-vous voter aux prochaines élections ?
+
+1.  Oui
+
+2.  Non
+
+<h3>Québec 2018</h3>
+
+Pour quel parti aviez-vous voté lors des élections provinciales du
+Québec en 2018 ?
+
+1.  Coalition Avenir Québec
+
+2.  Parti Québécois
+
+3.  Parti Libéral du Québec
+
+4.  Québec Solidaire
+
+5.  Parti vert du Québec
+
+6.  Autre
+
+7.  Bulletin nul
+
+8.  Je n’ai pas voté
+
+Note: 8 variables (vote\_quebec2018\_CAQ, vote\_quebec2018\_PQ,
+vote\_quebec2018\_PLQ, vote\_quebec2018\_QS, vote\_quebec2018\_vert,
+vote\_quebec2018\_autre, vote\_quebec2018\_bulletinnul,
+vote\_quebec2018\_pasvote). Pour chacune, les répondant.e.s ayant
+indiqué avoir voté pour ce parti sont codé.e.s 1, sinon 0.
+
+<h3>Vote - US</h3>
+
+Si vous étiez un résident des États-Unis, pour quel parti voteriez-vous
+?
+
+1.  Pour le parti républicain
+
+2.  Pour le parti démocrate
+
+<h3>Vote habitude</h3>
+
+Allez-vous voter à chaque élection ?
+
+1.  Oui, je vote toujours
+
+2.  Non, mais je vote la plupart du temps
+
+3.  Non, mais j’ai déjà voté
+
+4.  Non, je ne vote jamais
+
+<h3>Vote - même parti</h3>
+
+Avez-vous toujours voté pour le même parti au fil des années ?
+
+1.  Oui
+
+2.  Non
+
+<h3>Intention de vote - France</h3>
+
+(Si Français) Parmi les partis suivants, lequel a votre préférence si
+l’élection présidentielle avait lieu cette semaine ? 
+
+1.  La République en marche
+
+2.  Les Républicains
+
+3.  Europe Écologie - Les Verts
+
+4.  Le Parti socialiste
+
+5.  Le Rassemblement national
+
+6.  La France insoumise
+
+Note: 6 variables (vote\_france\_enmarche, vote\_france\_republicains,
+vote\_france\_verts, vote\_france\_PS, vote\_france\_RN,
+vote\_france\_insoumise). Pour chacune, les répondant.e.s ayant indiqué
+avoir l’intention de voter pour ce parti sont codé.e.s 1, sinon 0.
+
+<h3>Intention de vote - Canada</h3>
+
+Si la prochaine élection fédérale avait lieu dans une semaine, quel
+parti seriez vous plutôt en faveur d’appuyer ?
+
+1.  Parti Libéral
+
+2.  Parti conservateur
+
+3.  NPD
+
+4.  Bloc Québécois
+
+5.  Le Parti Vert
+
+6.  Autre
+
+Note: 6 variables (vote\_canada\_liberal, vote\_canada\_conservateur,
+vote\_canada\_npd, vote\_canada\_bloc, vote\_canada\_vert,
+vote\_canada\_autre). Pour chacune, les répondant.e.s ayant indiqué
+avoir l’intention de voter pour ce parti sont codé.e.s 1, sinon 0.
+
+<h3>Intention de vote - Québec</h3>
+
+Pour quel parti pensez-vous voter lors des futures élections
+provinciales ?
+
+1.  Coalition Avenir Québec
+
+2.  Parti Québécois
+
+3.  Parti Libéral du Québec
+
+4.  Québec Solidaire
+
+5.  Parti vert du Québec
+
+6.  Autre
+
+Note: 6 variables (vote\_quebec\_CAQ, vote\_quebec\_PQ,
+vote\_quebec\_PLQ, vote\_quebec\_QS, vote\_quebec\_vert,
+vote\_quebec\_autre). Pour chacune, les répondant.e.s ayant indiqué
+avoir l’intention de voter pour ce parti sont codé.e.s 1, sinon 0.
+
+<h3>Vote - Anciens présidents</h3>
+
+(Si Français) Lequel des ces anciens présidents Français pourriez-vous
+soutenir s’il se représentait à nouveau ? 
+
+1.  Charles De Gaulle
+
+2.  Jacques Chirac
+
+3.  Nicolas Sarkozy
+
+4.  François Hollande
+
+5.  Emmanuel Macron
+
+<h3>Vote - nationaliste</h3>
+
+Sur une échelle de 0 à 10 (0 étant pas du tout probable et 10 étant
+certain) quelle est la probabilité que vous votiez pour des partis
+nationalistes, régionalistes ou indépendantistes québécois ?
+
+<h3>Aucune preference</h3>
+
+Imaginez que vous n’éprouvez aucune préférence pour les candidats et
+pour aucun des partis. Que feriez-vous le jour de l’élection ?
+
+1.  Choisir l’option la moins pire
+
+2.  Voter au hasard
+
+3.  Ne pas voter
+
+<h3>Préférence - parti</h3>
+
+Imaginez maintenant que vous avez une préférence pour un parti, mais que
+vous n’aimez pas le candidat de ce parti. Que feriez-vous ?
+
+1.  vote pour ce parti quand-même
+
+2.  vote pour le parti adverse espérant passer un message
+
+3.  ne vote pas
+
+<h3>Satisfaction mode de scrutin</h3>
+
+Quel est votre niveau de satisfaction avec le mode de scrutin actuel
+dans votre pays ?
+
+1.  Tout à fait satisfait
+
+2.  Satisfait
+
+3.  Ni satisfait, ni insatisfait
+
+4.  Pas satisfait
+
+5.  Pas du tout satisfait
+
+<h3>Vote - chance favoris</h3>
+
+Quelle phrase correspond le mieux à ce que vous feriez si vous estimez
+que votre parti favori a peu ou pas de chance d’être représenté au
+Parlement ?
+
+1.  J’irai certainement voter
+
+2.  J’irai probablement voter
+
+3.  Je ne sais pas si je voterai ou non
+
+4.  Je n’irai probablement pas voter
+
+5.  Je n’irai certainement pas voter
+
+<h3>Importance - compétence</h3>
+
+Sur une échelle de 0 à 10, à quel point considérez-vous le niveau de
+compétence d’un candidat lorsque vous votez ? 0 = Pas du tout important;
+10 = très important
+
+<h3>Motivation</h3>
+
+Lorsqu’il s’agit de définir votre choix de vote, est ce l’idéologie qui
+dicte votre choix ou bien la personnalité du candidat ?
+
+1.  L’idéologie
+
+2.  Le candidat
+
+3.  Ni l’un, ni l’autre
+
+<h3>Vote - premier choix</h3>
+
+Lors de la dernière élection dans votre pays, aviez-vous voté pour le
+parti de votre premier choix ?
+
+1.  Oui
+
+2.  Non
+
+3.  Ne sais pas
+
+<h3>Stratégie vote 2</h3>
+
+[Si “non” question précédente] Avez-vous ressenti le besoin de voter
+pour un parti qui ne représentait pas parfaitement vos valeurs afin de
+réduire les chances d’un parti encore plus éloigné de vos valeurs de
+remporter l’élection ?
+
+1.  Oui
+
+2.  Non
+
+3.  Ne sais pas
+
+<h3>Autre choix - fréquence</h3>
+
+À quel fréquence considérez-vous voter pour un candidat ou un parti
+politique qui n’est pas votre premier choix ?
+
+1.  Toutes les élections
+
+2.  Une élection sur deux
+
+3.  Une élection sur trois
+
+4.  Une Une élection sur quatre ou plus
+
+5.  À aucune élection, je vote toujours pour mon premier choix
+
+<h3>Refus vote - Canada</h3>
+
+[Si répondant réside au canada] Y-a-t’il un parti fédéral parmi les
+choix suivants pour lequel vous ne voterez jamais ?
+
+1.  Parti Liberal
+
+2.  Parti conservateur
+
+3.  NPD
+
+4.  Bloc Québécois
+
+5.  Parti vert
+
+6.  Non, aucun
+
+<h3>Refus de voter pour un parti spécifique - France</h3>
+
+[Si répondant réside en France] Y-a-t’il un parti parmi les choix
+suivants pour lequel vous ne voterez jamais ?
+
+1.  Le Parti socialiste
+
+2.  La République en Marche
+
+3.  Les Républicains
+
+4.  La France insoumise
+
+5.  Europe-Écologie - Les Verts
+
+6.  Le Rassemblement national
+
+7.  Non, aucun
+
+

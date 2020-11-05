@@ -1,0 +1,370 @@
+---
+title: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<h3>Sources d’information</h3>
+
+Quelle est votre principale source d’information politique ?
+
+1.  La télévision
+
+2.  Les réseaux sociaux
+
+3.  Les journaux
+
+4.  Les articles internet
+
+<h3>Réseaux sociaux - cause</h3>
+
+Avez vous déjà utilisé les réseaux sociaux pour défendre une cause que
+vous soutenez ?
+
+1.  Oui, plusieurs fois
+
+2.  Oui une fois
+
+3.  Non
+
+4.  Je n’utilise pas les réseaux sociaux
+
+<h3>Médias traditionnels</h3>
+
+En période électorale, dans quelle mesure vous informez-vous dans les
+médias traditionnels afin de prendre connaissance et de comprendre les
+enjeux importants ?
+
+1.  Beaucoup
+
+2.  Assez
+
+3.  Peu
+
+4.  Pas du tout
+
+<h3>Consultation sondage - 1</h3>
+
+Avez-vous, récemment,consulté un sondage d’opinion, que ce soit sur
+internet ou dans tout autre média (journaux, radio, télévision) ?
+
+1.  Oui
+
+2.  Non
+
+3.  Ne sais pas
+
+<h3>Consultation sondage (Canada / France)</h3>
+
+[Si oui à la question précédente] Quel parti était en tête dans ces
+sondages ?\
+
+Canada:
+
+1.  Parti Libéral
+
+2.  Parti conservateur
+
+3.  NDP
+
+4.  Bloc Québécois
+
+5.  Parti vert
+
+France:\
+
+1.  Le Parti socialiste
+
+2.  La République en Marche
+
+3.  Les Républicains
+
+4.  La France insoumise
+
+5.  Europe-Écologie - Les Verts
+
+6.  Le Rassemblement national
+
+<h3>Principale source</h3>
+
+Quelle est votre principale source d’information lors des élections ?
+
+1.  Amis
+
+2.  Famille
+
+3.  Réseaux sociaux: Facebook, Instagram, Twitter
+
+4.  Journaux en ligne-Journaux papier
+
+<h3>Engagement - réseaux sociaux</h3>
+
+Vous sentez-vous plus engagé(e) politiquement depuis l’arrivée des
+réseaux sociaux ?
+
+1.  Oui
+
+2.  Un peu
+
+3.  Pas du tout
+
+<h3>Abonnements - personnalités </h3>
+
+Suivez-vous des personnalités politiques et\_ou médiatiques sur les
+réseaux sociaux ?
+
+1.  Oui, ceux qui partagent mes opinions politiques
+
+2.  Oui de tout bords politiques
+
+3.  Non
+
+<h3>Fréquence utilisation</h3>
+
+À quelle fréquence utilisez-vous les réseaux sociaux ?
+
+1.  Jamais
+
+2.  Rarement
+
+3.  Plusieurs fois par semaine
+
+4.  Moins d’une heure par jour
+
+5.  Entre 1 et 2 heures par jour
+
+6.  Entre 2 et 3 heures par jour
+
+7.  Plus de 3 heures par jour
+
+<h3>Inscriptions réseaux sociaux</h3>
+
+À combien de réseaux sociaux êtes vous inscrits ?
+
+1.  1
+
+2.  2
+
+3.  3
+
+4.  4 ou plus
+
+<h3>Contact - information</h3>
+
+À quelle fréquence êtes vous en contact avec du contenu politique sur
+les réseaux sociaux ?
+
+1.  Jamais
+
+2.  Rarement
+
+3.  Souvent
+
+4.  Systématiquement
+
+<h3>Plateforme</h3>
+
+Sur quelle plateforme voyez-vous passer le plus de contenu politique ?
+
+1.  Twitter
+
+2.  Youtube
+
+3.  Facebook
+
+4.  Autre
+
+<h3>Couverture - influence</h3>
+
+En période électorale, de quelle façon la couverture de différents
+événements politiques comme des conférences de presse, des débats ou des
+entrevues, influence-t-elle vote choix sur le bulletin de vote ?
+
+1.  Beaucoup
+
+2.  Assez
+
+3.  Peu
+
+4.  Pas du tout
+
+<h3>Médias - neutralité</h3>
+
+Les médias devraient toujours être neutre.
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Biais médias</h3>
+
+Les médias donnent une représentation de la société plus violente
+qu’elle ne l’est réellement.
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Chaînes - indépendance</h3>
+
+Les chaînes de nouvelles canadiennes qui se présentent comme neutres et
+indépendantes le sont réellement.
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Niveau d’information</h3>
+
+En général, comment évaluez-vous votre niveau d’information concernant
+la politique :
+
+1.  bien informé.e
+
+2.  plutôt informé.e
+
+3.  pas très informé.e
+
+4.  pas du tout informé.e
+
+5.  Je ne sais pas
+
+<h3>Effet - débats</h3>
+
+Indiquez sur une échelle de 0 à 10 à quel point le plus récent débat
+télévisé que vous avez vu a changé vos opinions sur les candidats (0 pas
+du tout 10 beaucoup)
+
+<h3>Importance débats TV</h3>
+
+Indiquez sur une échelle de 0 à 10 à quel point vous trouvez important
+qu’on diffuse des débats politiques à la télévision lors des campagnes
+électorales. (1= Pas du tout important; 10 = Très important)
+
+<h3>Confiance contenus RS</h3>
+
+À quel point faites vous confiance au contenu politique disponible sur
+les réseaux sociaux ?
+
+1.  Pas confiance
+
+2.  Un peu confiance
+
+3.  Moyennement confiance
+
+4.  Beaucoup confiance
+
+5.  Totalement confiance
+
+<h3>Confiance - TV et Radio</h3>
+
+À quel point faites-vous confiance au contenu politique diffusé à la
+télévision, dans la presse écrite et à la radio ?
+
+1.  Pas confiance
+
+2.  Un peu confiance
+
+3.  Moyennement confiance
+
+4.  Beaucoup confiance
+
+5.  Totalement confiance
+
+<h3>Confiance - Presse écrite</h3>
+
+À quel point faites-vous confiance au contenu politique diffusé dans la
+presse écrite ?
+
+1.  Pas confiance
+
+2.  Un peu confiance
+
+3.  Moyennement confiance
+
+4.  Beaucoup confiance
+
+5.  Totalement confiance
+
+<h3>Site - parti </h3>
+
+Répondez par oui ou par non si vous déjà : Accédé à un site internet
+d’un parti ou d’un candidat
+
+1.  Oui
+
+2.  Incertain
+
+3.  Non
+
+<h3>Like - parti</h3>
+
+Répondez par oui ou par non si vous déjà : s’être inscrit comme “soutien
+- amis - followers ” d’un parti ou d’un candidat sur leur site internet
+
+1.  Oui
+
+2.  Incertain
+
+3.  Non
+
+<h3>Sophistication - Etats-Unis</h3>
+
+Quel est le nom du ou de la juge que le président des États-Unis, Donald
+Trump souhaite nommer à la Cour suprême des Etats-Unis avant l’élection
+présidentielle de novembre 2020 ? Les répondant.e.s ayant trouvé la
+bonne réponse (Amy Coney Barrett) sont codé.e.s 1, sinon 0.
+
+1.  Morris Fiorina
+
+2.  Amy Coney Barrett
+
+3.  Ruth Bader Ginsburg
+
+4.  Brett Michael Kavanaugh
+
+<h3>Sophistication - [Freeland/Legault/macron/Pence/Singh]</h3>
+
+Identifiez quelle position occupent les personnalités suivantes :
+
+1.  Chrystia Freeland (bonne reponse: 5)
+
+2.  François Legault (bonne reponse: 4)
+
+3.  Emmanuel Macron (bonne reponse: 2)
+
+4.  Mike Pence (bonne reponse: 3)
+
+5.  Jagmeet Singh (bonne reponse: 1)
+
+Note: 5 variables (sophistication\_freeland, sophistication\_legault,
+sophistication\_macron, sophistication\_pence, sophistication\_singh).
+Pour chacune, les répondant.e.s ayant trouvé la bonne réponse sont
+codé.e.s 1, sinon 0.

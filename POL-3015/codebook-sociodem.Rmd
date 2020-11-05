@@ -1,0 +1,316 @@
+---
+title: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<h3>Année de naissance</h3>
+
+Quelle est votre année de naissance ?
+
+<h3>Age</h3>
+
+Variable année de naissance recodée.
+
+<h3>Emploi</h3>
+
+Quel est votre statut d’emploi actuel?
+
+1.  Salarié à temps plein
+
+2.  Salarié à temps partiel
+
+3.  Travailleur autonome (avec ou sans employés)
+
+4.  À la retraite
+
+5.  Au chômage/à la recherche d’un travail
+
+6.  Étudiant
+
+7.  En charge d’une famille
+
+8.  Handicapé
+
+9.  Étudiant et salarié
+
+10. En charge d’une famille et salarié
+
+11. À la retraite et salarié
+
+12. Autre
+
+13. Je ne sais pas / Préfère ne pas répondre
+
+<h3>Revenu</h3>
+
+Le revenu de votre ménage tombe-t-il dans l’une des catégories suivantes
+:
+
+1.  moins de \$30,000
+
+2.  \$30,000 à \$60,000
+
+3.  \$60,000 à \$90,000
+
+4.  \$90,000 à 110,000
+
+5.  Plus de \$110,000
+
+6.  Je ne sais pas / Préfère ne pas répondre
+
+<h3>Genre</h3>
+
+Quel est votre genre ?
+
+1.  Homme
+
+2.  Femme
+
+3.  Autre
+
+<h3>Citoyenneté</h3>
+
+Dans quel pays êtes-vous né(e) ?
+
+1.  Canada
+
+2.  États-Unis
+
+3.  Chine-Hong Kong-Taiwan
+
+4.  France
+
+5.  Allemagne
+
+6.  Inde
+
+7.  Italie
+
+8.  Pays-Bas
+
+9.  Pologne
+
+10. Portugal
+
+11. Royaume-Uni
+
+12. Belgique
+
+13. Suisse
+
+14. Sénégal
+
+15. Côte d’Ivoire
+
+16. Brésil
+
+17. Mexique
+
+18. Autre
+
+<h3>Ethnie</h3>
+
+(si canadien) A quel groupe ethnique ou culturel appartenez-vous, ou vos
+ancêtres appartenaient-ils, au moment d’arriver au Canada ?
+
+1.  Anglais
+
+2.  Irlandais
+
+3.  Britannique
+
+4.  Français
+
+5.  Italien
+
+6.  Chinois
+
+7.  Allemand
+
+8.  Polonais
+
+9.  Néerlandais
+
+10. Indien
+
+11. Écossais
+
+12. Ukrainien
+
+13. Autre
+
+<h3>Minorité</h3>
+
+Le gouvernement canadien définit les minorités visibles comme étant des
+“personnes, autres que les Autochtones, qui ne sont pas de race blanche
+ou qui n’ont pas la peau blanche”. Faites-vous partie d’une minorité
+visible ?
+
+1.  Oui
+
+2.  Non
+
+<h3>Education</h3>
+
+Quel est votre niveau d’éducation ?
+
+1.  Pas de diplôme / école primaire
+
+2.  Secondaire / Collégiales / CEGEP / Lycée / DEP
+
+3.  universitaire premier cycle
+
+4.  universitaire deuxième cycle et plus
+
+<h3>Religion, importance</h3>
+
+Indépendamment du fait que vous apparteniez à une religion ou non,
+quelle est l’importance de vos croyances religieuses ou spirituelles sur
+la façon dont vous vivez votre vie ?
+
+1.  Très important
+
+2.  assez important
+
+3.  pas très important
+
+4.  pas important du tout
+
+<h3>Reseau social</h3>
+
+Avez-vous des amis ou des connaissances issus de l’immigration ?
+
+1.  oui beaucoup
+
+2.  oui quelques-uns
+
+3.  non aucun
+
+<h3>Résidence</h3>
+
+Dans quel pays résidez-vous actuellement ?
+
+1.  Canada
+
+2.  France
+
+3.  États-Unis
+
+4.  Belgique
+
+5.  Suisse
+
+6.  Autre
+
+<h3>Naissance résidence</h3>
+
+Êtes-vous né(e) dans ce pays ?
+
+1.  Oui
+
+2.  Non
+
+<h3>Cohabitation</h3>
+
+Habitez-vous encore chez vos parents ?
+
+1.  Oui
+
+2.  Non
+
+<h3>Droit de vote</h3>
+
+Avez-vous le droit de vote dans votre pays de résidence ?
+
+1.  Oui
+
+2.  Non
+
+<h3>Province</h3>
+
+Dans quelle province ou territoire résidez-vous actuellement ?
+
+1.  Colombie-Britannique
+
+2.  Alberta
+
+3.  Saskatchewan
+
+4.  Manitoba
+
+5.  Ontario
+
+6.  Québec
+
+7.  Nouveau-Brunswick
+
+8.  Nouvelle-Écosse
+
+9.  Île-du-Prince-Édouard
+
+10. Terre-Neuve-et-Labrador
+
+11. Yukon
+
+12. Nunavut
+
+13. Territoires du Nord-Ouest
+
+<h3>Né(e) dans votre province de résidence</h3>
+
+1.  Oui
+
+2.  Non
+
+<h3>Classe sociale</h3>
+
+Si on vous demandait d’utiliser l’un de ces quatre termes pour désigner
+votre classe sociale, à laquelle diriez-vous que vous appartenez ?
+
+1.  classe moyenne
+
+2.  classe ouvrière
+
+3.  classe supérieure
+
+<h3>Classe sociale - parents</h3>
+
+Pensez-vous appartenir à la même classe sociale que vos parents ?
+
+1.  Oui
+
+2.  Non
+
+<h3>Langue</h3>
+
+La langue la plus souvent parlée à la maison est-elle une des langues
+officielles de votre pays ? 
+
+1.  Oui
+
+2.  Non
+
+<h3>Résidence parents - province</h3>
+
+Vos parents sont ils nés dans la province/region ou vous résidez
+actuellement
+
+1.  Oui
+
+2.  Non
+
+3.  Je ne sais pas
+
+<h3>Résidence parents - pays </h3>
+
+Vos parents sont ils nés dans le pays ou vous résidez actuellement
+
+1.  Oui
+
+2.  Non
+
+3.  Je ne sais pas

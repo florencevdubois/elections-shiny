@@ -1,0 +1,411 @@
+---
+title: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<h3>Idéologie</h3>
+
+En politique il est souvent fait référence à la “gauche” et à la
+“droite”. Où vous placeriez-vous sur l’échelle gauche- droite ? (0 =
+Extrême gauche , 5 = Centre,  10 = Extrême droite).
+
+<h3>Satisfaction avec la démocratie</h3>
+
+Dans l’ensemble, êtes-vous très satisfait(e), assez satisfait(e), peu
+satisfait(e) ou pas du tout satisfait e du fonctionnement de la
+démocratie dans votre pays ?
+
+1.  Très satisfait(e)
+
+2.  Assez satisfait(e)
+
+3.  Peu satisfait(e)
+
+4.  Pas du tout satisfait(e)
+
+<h3>Satisfaction Gouvernement</h3>
+
+Êtes-vous satisfait de la gouvernance actuelle dans votre pays ?
+
+1.  Grandement satisfait
+
+2.  Moyennement satisfait
+
+3.  Peu satisfait
+
+4.  Pas du tout satisfait
+
+<h3>Institutions démocratiques</h3>
+
+Quel est votre rapport avec les institutions démocratiques de votre pays
+?
+
+1.  J’y suis très attaché.e et je m’y intéresse beaucoup
+
+2.  Je ne m’y intéresse que pour certaines politiques publiques
+
+3.  Je ne m’y intéresse que très peu parce que je ne suis pas
+    intéressé.e par a politique
+
+4.  Je ne m’y intéresse pas du tout parce que je n’y crois plus
+
+<h3>Vote - démonstration</h3>
+
+Pour vous, voter est une démonstration de confiance envers l’élite
+politique ?
+
+1.  Oui, totalement
+
+2.  Oui, mais de moins en moins
+
+3.  Non, pas envers l’élite politique mais la démocratie seulement
+
+4.  Non, cela n’a rien à voir
+
+<h3>Confiance - Chef de l’État</h3>
+
+Avez-vous confiance en votre chef d’État actuel ?
+
+1.  Pas confiance
+
+2.  Peu confiance
+
+3.  Confiance
+
+4.  Moyennement confiance
+
+5.  Beaucoup confiance
+
+<h3>Altruisme - politiques</h3>
+
+Diriez-vous que les hommes politiques se préoccupent de ce que pensent
+les gens comme vous ?
+
+1.  Pas du tout
+
+2.  Peu
+
+3.  Moyennement
+
+4.  Correctement
+
+5.  Beaucoup
+
+<h3>Education civique</h3>
+
+J’ai appris mon rôle de citoyen grâce à l’enseignement civique que j’ai
+reçu à l’école.
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Ecoles</h3>
+
+Les écoles devraient faire plus pour éduquer les jeunes sur les
+avantages du vote et de la participation politique.
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Compréhension - élites </h3>
+
+Qu’ils soient de droite ou de gauche, ceux qui nous gouvernent ne
+comprennent rien aux problèmes des individus comme nous.
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Importance vote</h3>
+
+Il est important de voter lors d’une élection.
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Importance - représentation</h3>
+
+Il est important que toute opinion soit représentée au Parlement
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Disproportion électorale</h3>
+
+Il est inacceptable qu’un parti qui obtient moins de votes aux élections
+obtienne le plus grand nombre de sièges.
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Partis - votes</h3>
+
+Les partis fédéraux (ou nationaux) sont pour la plupart seulement
+intéressés par vos votes et non par vos opinions.
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Votes - objectif</h3>
+
+Dans mon pays, lors des dernières élections, les votes ont été
+comptabilisés de façon objective.
+
+<h3>Votes - délais</h3>
+
+Dans mon pays, lors des dernières élections, les résultats ont été
+annoncés dans un lapse de temps raisonnable.
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Réédition de compte</h3>
+
+Les élections sont un moyen de tenir le gouvernement responsable de ses
+actes.
+
+1.  Fortement d’accord
+
+2.  Plutôt d’accord
+
+3.  Ni en accord, ni en désaccord
+
+4.  Assez en désaccord
+
+5.  Plutôt en désaccord
+
+6.  Fortement en désaccord
+
+<h3>Importance - Chef</h3>
+
+Sur un échelle de 0 à 10, où 0 veut dire “pas du tout important” et 10
+veut dire “très important”, quelle importance accordez-vous aux chefs de
+parti quand vous décidez pour quel parti voter ?
+
+<h3>Intérêt politique</h3>
+
+Sur une échelle de 0 à 10 (0 étant le plus faible et 10 le plus élevé)
+comment évaluez-vous votre niveau d’intérêt pour la politique ?
+
+<h3>Intérêt - politique US</h3>
+
+Quelle attention accordez-vous à la politique américaine ?
+
+1.  Très intéressé
+
+2.  intéressé
+
+3.  indifférent
+
+4.  peu intéressé
+
+5.  désintéressé
+
+<h3>Connaissances - politique US</h3>
+
+Sur une échelle de 0 à 10, notez le niveau de connaissance que vous
+pensez avoir de la politique américaine (0 étant aucune connaissance et
+10 étant beaucoup de connaissances)
+
+<h3>Engagement politique</h3>
+
+Quel mode d’engagement politique à votre préférence ?
+
+1.  Le vote
+
+2.  Manifestation et pétitions
+
+3.  Manifestation, pétitions et vote
+
+4.  Aucun
+
+5.  Pas sûr
+
+<h3>Proche parti</h3>
+
+De façon générale, vous sentez-vous proche d’un parti politique ?
+
+1.  Oui
+
+2.  Non
+
+3.  Ne sais pas
+
+<h3>Importance traits</h3>
+
+Sur une échelle de 0 à 10, à quel point considérez-vous le caractère
+d’un candidat lorsque vous votez ? 0 = Pas du tout important; 10 = très
+important
+
+<h3>Traits de personnalité (plusieurs variables)</h3>
+
+Classez les traits de personnalité d’un chef de parti du plus important
+au moins important: intégrité, leadership, compétence, empathie.\
+
+Note: une variable par trait.
+
+-   trait\_integrite : rang integrite
+
+-   trait\_leadership : rang leadership
+
+-   trait\_competence : rang competence
+
+-   trait\_empathie : rang empathie
+
+<h3>Représentation - partis</h3>
+
+Vous sentez-vous bien représentés par un des grands partis (plus de 5%
+des voix aux dernières élections) de la scène fédérale ou nationale ? Si
+le pays où vous votez utilise un système mixte ou entièrement
+proportionnel, veuillez choisir “Ne s’applique pas”).
+
+1.  Tout à fait
+
+2.  De manière satisfaisante
+
+3.  Pas vraiment
+
+4.  Pas du tout
+
+5.  Ne s’applique pas
+
+<h3>Mode de scrutin</h3>
+
+Quel est votre sentiment concernant votre mode de scrutin au niveau
+fédéral ou national. Si le pays où vous votez utilise un système mixte
+ou entièrement proportionnel, veuillez choisir “Ne s’applique pas”).
+
+1.  Tout à fait satisfait
+
+2.  Satisfait
+
+3.  Neutre
+
+4.  Peu satisfait
+
+5.  Ne s’applique pas
+
+<h3>Changement scrutin</h3>
+
+Êtes-vous en faveur d’un changement de mode de scrutin incluant une
+variable proportionnelle ? Cela implique une plus grande
+proportionnalité entre les pourcentages de vote reçus des différentes
+formations politiques et leurs pourcentages de sièges obtenus. Si le
+pays où vous votez utilise déjà un mode de scrutin de type mixte ou
+proportionnel, alors choisissez l’option “ne s’applique pas”.
+
+1.  Tout à fait en faveur
+
+2.  Plutôt en faveur
+
+3.  Sans opinion, neutre
+
+4.  Plutôt en défaveur
+
+5.  Tout à fait en défaveur
+
+6.  Ne s’applique pas
+
+<h3>Vote stratégique</h3>
+
+Si vous deviez juger du caractère démocratique du vote stratégique,
+quelle serait votre évaluation sur une échelle de 0 à 10, 0 signifiant
+un caractère anti-démocratique, 10, entièrement démocratique.
+
+<h3>Intégration localité</h3>
+
+Sur une échelle de 0 à 10 (0 étant pas du tout intégré et 10 étant
+totalement intégré) comment qualifieriez-vous votre degré d’intégration
+à votre province ou pays de résidence actuel ?
+
+<h3>Thermometer - partis (plusieurs variables)</h3>
+
+Sur une échelle allant de 0 à 10 (0=je déteste profondément ce parti,
+10=j’adore profondément ce parti, 5=neutre), donnez un score aux partis
+suivants: (note: une variable par parti, portant le nom du parti:
+parti\_liberal, parti\_conservateur, ndp, bloc\_quebecois, parti\_vert)\
+
+1.  Le Parti libéral
+
+2.  Le Parti conservateur
+
+3.  NDP
+
+4.  Bloc Québécois
+
+5.  Le Parti vert
