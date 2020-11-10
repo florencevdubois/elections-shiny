@@ -260,7 +260,7 @@ ui <- navbarPage("Les élections (POL 3015)",
                             p("L'onglet", em("Description des variables"), "présente la liste de toutes les variables qui se trouvent dans la banque de données.", style = "font-size:16px"),
                             p("Utilisez l'onglet", em("Statistiques descriptives"), "pour connaître la distribution des variables (étendue, moyenne, médiane, etc.), créer des histogrammes et consulter les tableaux de fréquences.", style = "font-size:16px"),
                             p("L'onglet", em("Tableaux croisés"), "vous permet de croiser des variables catégorielles et/ou dichotomiques pour voir combien de répondant.e.s se trouvent dans chaque catégorie de réponse.", style = "font-size:16px"),
-                            p("Enfin, l'onglet", em("Analyses multivariées"), "vous permet de faire les analyses de régression que vous présenterez dans votre travail final. Choisissez les variables ddépendante, indépendante et de contrôle, faites l'analyse, puis rapportez et interprétez les résultats dans votre travail de session.", style = "font-size:16px"),
+                            p("Enfin, l'onglet", em("Analyses multivariées"), "vous permet de faire les analyses de régression que vous présenterez dans votre travail final. Choisissez les variables dépendante, indépendante et de contrôle, faites l'analyse, puis rapportez et interprétez les résultats dans votre travail de session.", style = "font-size:16px"),
                             p("Bonne exploration!", style = "font-size:16px"),
                             p(br()),
                             p("Ruth Dassonneville, Professeure agrégée, Département de science politique de l'Université de Montréal; enseignante du cours POL 3015", style = "font-size:14px"), 
@@ -345,11 +345,19 @@ ui <- navbarPage("Les élections (POL 3015)",
                             selectInput("var2",
                                         label = "Sélectionnez une variable pour les colonnes...",
                                         choice = c(Choisissez = '', cat_dicho_variables))),
-                            mainPanel(h3("Votre tableau croisé"),
+                            mainPanel(h4("Interprétation"),
+                                      p("Les catégories de la variable sélectionnée pour les colonnes se trouvent en haut du tableau."),
+                                      p("Les catégories de la variable sélectionnée pour les lignes se trouvent à gauche du tableau."),
+                                      p("La ligne", em("Total"), "indique le total de répondant.e.s dans chaque colonne."),
+                                      p("La colonne", em("Total"), "indique le total de répondant.e.s dans chaque ligne."),
+                                      p("La colonne", em("Pourcentage"), "indique le pourcentage de répondant.e.s dans chaque ligne."),
+                                      p("Les autres cellules indiquent combien de répondant.e.s. se trouvent dans chaque catégorie des 2 variables."),
+                                     #tableOutput("crosstab"),
+                                      h3("Votre tableau croisé"),
+                                      tableOutput("crosstab2"),
+                                      h4("Notes"),
                                       p("Seules les variables catégorielles et dichotomiques peuvent être utilisées pour créer un tableau croisé."), 
-                                      p("Consultez le codebook dans l'onglet", em("Description des variables"), "pour connaître la signification des catégories de réponse pour les variables dichotomiques."),
-                                      #tableOutput("crosstab"),
-                                      tableOutput("crosstab2"))
+                                      p("Consultez le codebook dans l'onglet", em("Description des variables"), "pour connaître la signification des catégories de réponse pour les variables dichotomiques."))
                           )
                           ),
                  #### regressions panel ####
@@ -483,7 +491,8 @@ server <- function(input, output) {
 
     # datasummary((`Variable 1`=x) * (`Variable 2`=y) + 1 ~ (`Nombre d'observations` = 1) + (`Pourcentage` = Percent()),
     #             data = datatable)
-    datasummary((` ` = x) ~ y + (`Total` = 1) + (`Pourcentage` = Percent()),
+    datasummary((` ` = x)  + (`Total` = 1) ~ y + (`Total` = 1) + (`Pourcentage` = Percent()),
+                fmt = "%.0f",
                 data = datatable)
     
   })
