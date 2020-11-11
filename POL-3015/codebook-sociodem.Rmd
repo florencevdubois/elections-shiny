@@ -15,6 +15,24 @@ Quelle est votre année de naissance ?
 
 Variable année de naissance recodée.
 
+<h3>Age, catégories</h3>
+
+Variable d'âge recodée en catégories.
+
+1. Moins de 25 ans
+
+2. 25-34 ans
+
+3. 35-44 ans
+
+4. 45-54 ans
+
+5. 55-64 ans
+
+6. 65-74 ans
+
+7. 75 ans et plus
+
 <h3>Emploi</h3>
 
 Quel est votre statut d’emploi actuel?

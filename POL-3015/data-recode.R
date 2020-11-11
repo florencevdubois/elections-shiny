@@ -147,9 +147,9 @@ dat <- dat %>%
                                 `5`="5.Plus de $110,000",
                                 `6`="6.Je ne sais pas / Préfère ne pas répondre)"),
          genre= recode(genre, 
-                       `1` = "Homme", 
-                       `2` =  "Femme", 
-                       `3` = "Autre"),
+                       `1` = "1.Homme", 
+                       `2` =  "2.Femme", 
+                       `3` = "3.Autre"),
          citoyennete = recode(citoyennete,
                               `1`="Canada",
                               `2`="États-Unis",
@@ -738,7 +738,14 @@ dat <- dat %>%
                                   `4`="France insoumise",
                                   `5`="Europe-écologie - Les verts",
                                   `6`="RN",
-                                  `7`= "Aucun"))
+                                  `7`= "Aucun"),
+         age_categories = ifelse(age < 25, "1.Moins de 25 ans",
+                                 ifelse(age >= 25 & age < 35, "2.25-34 ans",
+                                        ifelse(age >= 35 & age < 45, "3.35-44 ans",
+                                               ifelse(age >= 45 & age < 55, "4.55-54 ans",
+                                                      ifelse(age >= 55 & age < 65, "5.55-64 ans",
+                                                             ifelse(age >= 65 & age < 75, "6.65-74 ans",
+                                                                    ifelse(age >= 75, "7.75 ans et plus", NA))))))))
 
 #### Reorder variables ####
 dat <- dat %>% 
@@ -767,7 +774,7 @@ dat <- dat %>%
           vote_US_VD, vote_france_enmarche_VD, vote_france_republicains_VD, vote_france_verts_VD, vote_france_PS_VD, vote_france_RN_VD, 
           vote_france_insoumise_VD, vote_canada_liberal_VD, vote_canada_conservateur_VD, vote_canada_npd_VD, vote_canada_bloc_VD, vote_canada_vert_VD, 
           vote_canada_autre_VD, vote_quebec_CAQ_VD, vote_quebec_PQ_VD, vote_quebec_PLQ_VD, vote_quebec_QS_VD, vote_quebec_vert_VD, vote_quebec_autre_VD, 
-          anciens_presidents_VD, vote_strategique_VD, changement_scrutin_VD) %>% 
+          anciens_presidents_VD, vote_strategique_VD, changement_scrutin_VD,age_categories) %>% 
   arrange(annee_naissance, age, emploi, revenu, genre, citoyennete, ethnie, minorite, education, religion, reseau_social, residence, naissance_pays_residence, cohabitation, droit_vote,
           province, naissance_province_residence, classe_sociale, classe_sociale_parents, langue, province_naissance_parents, pays_naissance_parents, climat_social, covid_satisfaction,
           covid_soin, covid_gestion, covid_inquietude, covid_jeune, covid_politiques, immigration_ouverture, immigration_syrie, climat_economie, transition_energetique_taxes,
@@ -793,7 +800,7 @@ dat <- dat %>%
           vote_US_VD, vote_france_enmarche_VD, vote_france_republicains_VD, vote_france_verts_VD, vote_france_PS_VD, vote_france_RN_VD, 
           vote_france_insoumise_VD, vote_canada_liberal_VD, vote_canada_conservateur_VD, vote_canada_npd_VD, vote_canada_bloc_VD, vote_canada_vert_VD, 
           vote_canada_autre_VD, vote_quebec_CAQ_VD, vote_quebec_PQ_VD, vote_quebec_PLQ_VD, vote_quebec_QS_VD, vote_quebec_vert_VD, vote_quebec_autre_VD, 
-          anciens_presidents_VD, vote_strategique_VD, changement_scrutin_VD)
+          anciens_presidents_VD, vote_strategique_VD, changement_scrutin_VD,age_categories)
 
 custom_glimpse <- function(df) {
   data.frame(
@@ -809,6 +816,7 @@ variable_nb <- custom_glimpse(dat)
 class(dat$education)
 table(dat$education)
 class(dat$participation_VD)
+table(dat$genre)
 
 #### Group variable types #####
 
@@ -816,6 +824,7 @@ class(dat$participation_VD)
 categorical_variables <- c("Emploi" = 3, 
                            "Revenu" = 4,
                            "Genre" = 5,
+                           "Age - catégories" = 212,
                            "Citoyenneté" = 6,
                            "Ethnie" = 7,
                            "Éducation" = 9,
@@ -1043,6 +1052,7 @@ variables <- c(categorical_variables, dichotomous_variables, continuous_variable
 # convert categorical and dichotomous variables to factor 
 #dat[cat_dicho_variables] <- sapply(dat[cat_dicho_variables], as.factor)
 summary(dat$education)
+table(dat$age_categories)
 summary(dat$genre)
 table(dat$genre)
 summary(dat$annee_naissance)

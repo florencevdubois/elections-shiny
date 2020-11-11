@@ -19,6 +19,7 @@ d <- read.csv("data/sondage_recoded.csv") %>% dplyr::select(-X)
 categorical_variables <- c("Emploi" = 3, 
                            "Revenu" = 4,
                            "Genre" = 5,
+                           "Age - catégories" = 212,
                            "Citoyenneté" = 6,
                            "Ethnie" = 7,
                            "Éducation" = 9,
